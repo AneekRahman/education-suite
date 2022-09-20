@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Aleo:400,700|Limelight&display=swap");
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: "Aleo", "Limelight", Helvetica, Arial, sans-serif;
+}
