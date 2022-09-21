@@ -1,13 +1,52 @@
 import React from "react";
 import Header from "../components/Header";
 import styles from "../styles/HomePage.module.scss";
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Text, Button, Center } from "@chakra-ui/react";
 
 interface Event {
-  date: string;
+  date: string; // Jan 8
   title: string;
   link: string;
 }
+
+interface Notice {
+  date: string; // March 26, 2018
+  title: string;
+  link: string;
+}
+
+const noticesList: Notice[] = [
+  {
+    date: "March 26, 2018",
+    title:
+      "সেই মাঠমার্চ যেটি মহান স্বাধীনতা ও জাতীয় দিবস-2018 খ্রিঃ আটঘরিয়া উপজেলা স্টেডিয়াম মাঠে   কয়রাবাড়ীবহুমুখী উচ্চ বিদ্যালয় প্রথম স্থান অধিকার করে।",
+    link: "",
+  },
+  {
+    date: "March 26, 2018",
+    title:
+      "পাবনার আটঘরিয়া উপজেলার ঐতিহ্যবাহী কয়রাবাড়ী বহুমুখী উচ্চ বিদ্যালয়ে বুধবার (৩ আগষ্ট -২০২২ খ্রি.) পাঠদান কার্যক্রম পরিদর্শন করেন উপজেলা নির্বাহী কর্মকর্তা মাকসুদা আক্তার মাসু। ",
+    link: "",
+  },
+  {
+    date: "March 26, 2018",
+    title:
+      "কয়রাবাড়ী বহুমুখী উচ্চ বিদ্যালয়ের সহকারী শিক্ষক (গণিত) মোঃ নাসির উদ্দিনের পিতা জহুরুল ইসলাম মুন্সী রবিবার দিনগত মধ্যরাতে ইন্তেকাল করিয়াছেন",
+    link: "",
+  },
+  {
+    date: "March 26, 2018",
+    title:
+      "কয়রাবাড়ী বহুমুখী উচ্চ বিদ্যালয়ের ম্যানেজিং কমিটি, সকল  শিক্ষক, অভিভাবক, শিক্ষার্থীদের ঈদুল আযহার শুভেচ্ছা। ঈদ মোবারক",
+    link: "",
+  },
+  {
+    date: "March 26, 2018",
+    title:
+      "মাননীয় এমপি মহোদয় বীর মুক্তিযোদ্ধা  জনাব আলহাজ্ব মোঃ নুরুজ্জামান বিশ্বাস, সংসদ সদস্য পাবনা-৪ (আটঘরিয়া-ঈশ্বরদী)।",
+    link: "",
+  },
+];
 
 const eventsList: Event[] = [
   {
@@ -46,32 +85,58 @@ export default function HomePage() {
         <EventsBox />
       </div>
       <MessagesRow />
+      <NoticeBox />
 
       <div style={{ height: "30em" }}></div>
     </div>
   );
 }
 
+function NoticeBox() {
+  return (
+    <Flex justifyContent="center" className={styles.NoticeBoxWrapper}>
+      <div className={styles.NoticeFakeBox}></div>
+      <div className={styles.NoticeBoxInnerWrapper}>
+        <h3>NOTICE BOARD</h3>
+
+        <div className={styles.NoticesWrapper}>
+          {noticesList.map((notice: Notice) => (
+            <div className={styles.Notice}>
+              <Heading as="h4">{notice.title}</Heading>
+              <p>{notice.date}</p>
+            </div>
+          ))}
+          <Center>
+            <Button colorScheme="red">SHOW MORE</Button>
+          </Center>
+        </div>
+      </div>
+    </Flex>
+  );
+}
+
 function MessagesRow() {
   return (
-    <Flex className={styles.MessagesRowWrapper} justifyContent="space-evenly">
-      <h3>MESSAGES</h3>
+    <Center>
+      <Flex className={styles.MessagesRowWrapper} justifyContent="space-evenly">
+        <h3>MESSAGES</h3>
 
-      <Flex className={styles.MessageColumn} alignItems="center">
-        <img src="/assets/mc1.png" alt="" />
-        <div>
-          <h4>MD. ZILLUR RAHMAN</h4>
-          <p>ASSISTANT PRINCIPAL</p>
-        </div>
+        <Flex className={styles.MessageColumn} alignItems="center">
+          <img src="/assets/mc2.png" alt="" />
+          <div>
+            <h4>MD. ZILLUR RAHMAN</h4>
+            <p>ASSISTANT PRINCIPAL</p>
+          </div>
+        </Flex>
+        <Flex className={styles.MessageColumn} alignItems="center">
+          <img src="/assets/mc1.png" alt="" />
+          <div>
+            <h4>MD. TOFAZZOL HOSSAIN</h4>
+            <p>ASSISTANT TEACHER</p>
+          </div>
+        </Flex>
       </Flex>
-      <Flex className={styles.MessageColumn} alignItems="center">
-        <img src="/assets/mc1.png" alt="" />
-        <div>
-          <h4>MD. TOFAZZOL HOSSAIN</h4>
-          <p>ASSISTANT TEACHER</p>
-        </div>
-      </Flex>
-    </Flex>
+    </Center>
   );
 }
 
