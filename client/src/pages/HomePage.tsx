@@ -9,6 +9,14 @@ import {
   Center,
   Grid,
   GridItem,
+  Spacer,
+  TableContainer,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
 } from "@chakra-ui/react";
 
 interface Event {
@@ -54,6 +62,18 @@ const noticesList: Notice[] = [
     date: "March 26, 2018",
     title:
       "মাননীয় এমপি মহোদয় বীর মুক্তিযোদ্ধা  জনাব আলহাজ্ব মোঃ নুরুজ্জামান বিশ্বাস, সংসদ সদস্য পাবনা-৪ (আটঘরিয়া-ঈশ্বরদী)।",
+    link: "",
+  },
+  {
+    date: "March 26, 2018",
+    title:
+      "সেই মাঠমার্চ যেটি মহান স্বাধীনতা ও জাতীয় দিবস-2018 খ্রিঃ আটঘরিয়া উপজেলা স্টেডিয়াম মাঠে   কয়রাবাড়ীবহুমুখী উচ্চ বিদ্যালয় প্রথম স্থান অধিকার করে।",
+    link: "",
+  },
+  {
+    date: "March 26, 2018",
+    title:
+      "পাবনার আটঘরিয়া উপজেলার ঐতিহ্যবাহী কয়রাবাড়ী বহুমুখী উচ্চ বিদ্যালয়ে বুধবার (৩ আগষ্ট -২০২২ খ্রি.) পাঠদান কার্যক্রম পরিদর্শন করেন উপজেলা নির্বাহী কর্মকর্তা মাকসুদা আক্তার মাসু। ",
     link: "",
   },
 ];
@@ -118,9 +138,63 @@ export default function HomePage() {
       <MessagesRow />
       <NoticeBox />
       <EventsImageGrid />
+      <LocationAboutBox />
 
       <div style={{ height: "30em" }}></div>
     </div>
+  );
+}
+
+function LocationAboutBox() {
+  return (
+    <Center marginTop="4em">
+      <div className={styles.LocationAboutBox}>
+        <Flex>
+          <div className={styles.TextsWrapper}>
+            <Heading as="h3">FIND OUR LOCATION</Heading>
+            <Flex height="100%" alignItems="center">
+              <Text>ATGHARIA, PABNA</Text>
+            </Flex>
+          </div>
+
+          <div className="google-map-code" style={{ width: "100%" }}>
+            <iframe
+              title="Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d933172.7474488!2d89.06958384789172!3d23.98850011048644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe831cd164c30f%3A0x24068820884fc22!2z4KaV4Kav4Ka84Kaw4Ka-4Kas4Ka-4Kah4Ka84Ka_IOCmrOCmueCngeCmruCngeCmluCngCDgpongpprgp43gppog4Kas4Ka_4Kam4KeN4Kav4Ka-4Kay4Kav4Ka8!5e0!3m2!1sen!2sbd!4v1663787881846!5m2!1sen!2sbd"
+              width="100%"
+              height="500px"
+              frameBorder="0"
+              style={{ border: 0 }}
+              allowFullScreen={false}
+              aria-hidden="false"
+              tabIndex={0}
+            ></iframe>
+          </div>
+        </Flex>
+        <TableContainer className={styles.Table}>
+          <Table variant="simple" colorScheme="blackAlpha">
+            <Tbody>
+              <Tr>
+                <Td>EIIN NO</Td>
+                <Td>NU CODE</Td>
+                <Td>REG NO</Td>
+                <Td>DSHE</Td>
+                <Td>UPO NO HSC</Td>
+                <Td>UPO NO DEGREE</Td>
+              </Tr>
+              <Tr>
+                <Td>125260</Td>
+                <Td>10000</Td>
+                <Td>10000 (Rajshahi)</Td>
+                <Td>10000</Td>
+                <Td>10000</Td>
+                <Td>10000</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </div>
+    </Center>
   );
 }
 
@@ -160,6 +234,10 @@ function EventsImageGrid() {
           </GridItem>
         ) : null}
       </Grid>
+      <Spacer h="10" />
+      <Center>
+        <Button colorScheme="red">SHOW ALL EVENTS</Button>
+      </Center>
     </div>
   );
 }
@@ -212,7 +290,7 @@ function NoticeBox() {
             </div>
           ))}
           <Center>
-            <Button colorScheme="red">SHOW MORE</Button>
+            <Button colorScheme="red">SHOW ALL NOTICES</Button>
           </Center>
         </div>
       </div>

@@ -22,10 +22,18 @@ $paddingLeftHeader: 6vw;
         background-color: black;
         width: 100%;
         margin-bottom: 1em;
+        overflow: hidden;
 
         p {
           color: white;
           padding: 0.5em 1em;
+          animation: movingHeadline 20s linear infinite;
+          cursor: pointer;
+          white-space: nowrap;
+
+          &:hover {
+            color: rgb(0, 132, 197);
+          }
         }
       }
 
@@ -192,14 +200,14 @@ $paddingLeftHeader: 6vw;
     .NoticeFakeBox {
       background-color: white;
       position: absolute;
-      width: calc(800px + 6em);
+      width: calc(70vw + 6em);
       height: calc(100% - 3em);
       top: 1.5em;
       box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     }
 
     .NoticeBoxInnerWrapper {
-      max-width: 800px;
+      max-width: 70vw;
       padding: 3em;
       background-color: white;
       box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.1);
@@ -214,7 +222,7 @@ $paddingLeftHeader: 6vw;
         margin-top: 1em;
 
         .Notice {
-          margin-bottom: 2em;
+          margin-bottom: 1em;
           transition: 0.3s;
           cursor: pointer;
           padding: 0.4em;
@@ -268,7 +276,7 @@ $paddingLeftHeader: 6vw;
       color: white;
 
       &:hover .ReadMoreBox {
-        height: 7em;
+        height: 20%;
       }
 
       &:hover .TextWrapper {
@@ -302,5 +310,38 @@ $paddingLeftHeader: 6vw;
         }
       }
     }
+  }
+
+  .LocationAboutBox {
+    background-color: #f07070;
+    width: 80vw;
+    color: white;
+    font-family: Aleo, Arial, Helvetica, sans-serif;
+    font-weight: 900;
+
+    .TextsWrapper {
+      background-color: black;
+      padding: 1em;
+
+      p {
+        font-size: 2em;
+      }
+    }
+
+    .Table {
+      padding: 1em;
+    }
+  }
+}
+
+@keyframes movingHeadline {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
