@@ -135,8 +135,9 @@ export default function HomePage() {
         </div>
         <EventsBox />
       </div>
-      {/* <MessagesRow />
-      <div className={styles.WigglyBg1Wrapper}>
+      <MessagesRow />
+      <div style={{ height: "30em" }}></div>
+      {/* <div className={styles.WigglyBg1Wrapper}>
         <img src="/assets/wiggly-bg1.svg" className={styles.WiggleBg1} alt="" />
         <NoticeBox />
       </div>
