@@ -12,9 +12,6 @@
   padding-left: 6vw;
 
   .UpperRowWrapper {
-    display: flex;
-    justify-content: flex-start;
-
     .Logo {
       height: 7em;
     }
@@ -45,7 +42,7 @@
   }
 
   .LowerRowWrapper {
-    margin-top: 1em;
+    margin-top: 0.5em;
 
     button {
       font-family: Aleo, Helvetica, Arial, sans-serif;

@@ -7,6 +7,8 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Divider,
+  Text,
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
 
@@ -47,7 +49,7 @@ const tabsList: MyTab[] = [
 export default function Header() {
   return (
     <div className={styles.Header}>
-      <div className={styles.UpperRowWrapper}>
+      <Flex justifyContent="flex-start" className={styles.UpperRowWrapper}>
         <img className={styles.Logo} src="/assets/header-logo.png" alt="" />
         <div className={styles.UpperColumn}>
           <div className={styles.MovingHeadlineWrapper}>
@@ -57,14 +59,30 @@ export default function Header() {
               প্রসারে সম্ভাবনার সৃষ্টি করে
             </p>
           </div>
-          <h1>কয়রাবারী বহুমুখী উচ্চ বিদ্যালয়, পাবনা</h1>
+          <Flex justifyContent="space-between" alignItems="center">
+            <h1>কয়রাবারী বহুমুখী উচ্চ বিদ্যালয়, পাবনা</h1>
+            <Box
+              marginRight="4"
+              border="1px solid rgba(255,255,255,.4)"
+              display="flex"
+              padding="2"
+            >
+              <Text color="white" fontWeight="800">
+                ESTABLISHED: 1972
+              </Text>
+              <Divider m="2" orientation="vertical" />
+              <Text color="white" fontWeight="800">
+                EIIN: 125260
+              </Text>
+            </Box>
+          </Flex>
         </div>
-      </div>
+      </Flex>
       <div className={styles.LowerRowWrapper}>
         {tabsList.map((tab: MyTab) => (
           <Menu>
             <MenuButton
-              p="0.5em 1.5em"
+              p=".7em 1.5em 0.5em"
               _hover={{
                 bg: "rgba(0,0,0,0.05)",
               }}
