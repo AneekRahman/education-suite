@@ -136,8 +136,14 @@ export default function HomePage() {
         <EventsBox />
       </div>
       <MessagesRow />
-      <NoticeBox />
-      <EventsImageGrid />
+      <div className={styles.WigglyBg1Wrapper}>
+        <img src="/assets/wiggly-bg1.svg" className={styles.WiggleBg1} alt="" />
+        <NoticeBox />
+      </div>
+      <div className={styles.WigglyBg2Wrapper}>
+        <img src="/assets/wiggly-bg2.svg" className={styles.WiggleBg2} alt="" />
+        <EventsImageGrid />
+      </div>
       <LocationAboutBox />
       <Footer />
     </div>

@@ -193,6 +193,21 @@ $paddingLeftHeader: 6vw;
     }
   }
 
+  .WigglyBg1Wrapper,
+  .WigglyBg2Wrapper {
+    position: relative;
+
+    .WiggleBg1,
+    .WiggleBg2 {
+      position: absolute;
+      width: 100%;
+    }
+
+    .WiggleBg2 {
+      top: -20vw;
+    }
+  }
+
   .NoticeBoxWrapper {
     margin: 4em;
     position: relative;
@@ -260,6 +275,7 @@ $paddingLeftHeader: 6vw;
 
   .EventsImageGrid {
     margin-top: 10em;
+    position: relative;
 
     h3 {
       margin-left: 4em;
@@ -313,6 +329,7 @@ $paddingLeftHeader: 6vw;
   }
 
   .LocationAboutBox {
+    position: relative;
     background-color: #f07070;
     width: 80vw;
     color: white;
