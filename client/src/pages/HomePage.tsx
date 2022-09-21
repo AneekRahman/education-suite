@@ -126,14 +126,14 @@ export default function HomePage() {
       <div className={styles.HeroWrapper}>
         <div className={styles.BgDarkGradient}></div>
         <Header />
-        {/* <div className={styles.HeroMainTextWrapper}>
+        <div className={styles.HeroMainTextWrapper}>
           <h2>
             Excellence in
             <br />
             Knowledge
           </h2>
         </div>
-        <EventsBox /> */}
+        <EventsBox />
       </div>
       {/* <MessagesRow />
       <div className={styles.WigglyBg1Wrapper}>

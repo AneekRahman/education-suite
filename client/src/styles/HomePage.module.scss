@@ -482,4 +482,29 @@ $mobileMediaThreshold: 1000px;
       display: none;
     }
   }
+
+  .HomePage {
+    .HeroWrapper {
+      .HeroMainTextWrapper {
+        h2 {
+          font-size: 3em;
+        }
+      }
+      .HeroEventsWrapper {
+        h3 {
+          left: 2em;
+        }
+        .EventColumn {
+          margin: 0;
+
+          h4 {
+            font-size: 1.5em;
+          }
+          p {
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
 }
