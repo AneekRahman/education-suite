@@ -1,4 +1,5 @@
 $paddingLeftHeader: 6vw;
+$mobileMediaThreshold: 1000px;
 
 .Header {
   background-color: rgba(255, 99, 99, 0.73);
@@ -10,39 +11,58 @@ $paddingLeftHeader: 6vw;
   z-index: 1000;
 
   .UpperRowWrapper {
+    width: 100%;
+    overflow: hidden;
+
     .Logo {
       height: 7em;
+      width: 7em;
+    }
+
+    .PcMovingHeadlineWrapper,
+    .MobileMovingHeadlineWrapper {
+      background-color: black;
+      width: 100%;
+      margin-bottom: 1em;
+      overflow: hidden;
+
+      p {
+        color: white;
+        padding: 0.5em 1em;
+        animation: movingHeadline 20s linear infinite;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+          color: rgb(0, 132, 197);
+        }
+      }
+    }
+    .MobileMovingHeadlineWrapper {
+      display: none;
     }
 
     .UpperColumn {
       width: 100%;
       margin-left: 1em;
 
-      .MovingHeadlineWrapper {
-        background-color: black;
-        width: 100%;
-        margin-bottom: 1em;
-        overflow: hidden;
-
-        p {
-          color: white;
-          padding: 0.5em 1em;
-          animation: movingHeadline 20s linear infinite;
-          cursor: pointer;
-          white-space: nowrap;
-
-          &:hover {
-            color: rgb(0, 132, 197);
-          }
-        }
-      }
-
-      h1 {
-        font-weight: 600;
-        font-size: 2em;
-        font-family: Arial, Helvetica, sans-serif;
-        color: white;
+      .TitleWrapper {
         margin-left: 1em;
+
+        h1 {
+          font-weight: 600;
+          font-size: 2em;
+          font-family: Arial, Helvetica, sans-serif;
+          color: white;
+        }
+
+        .EIINBox {
+          padding: 0.5em 1em;
+        }
+
+        .MobileMenuWrapper {
+          display: none;
+        }
       }
     }
   }
@@ -402,5 +422,64 @@ $paddingLeftHeader: 6vw;
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+
+@media screen and (max-width: $mobileMediaThreshold) {
+  .Header {
+    padding: 0;
+    padding-bottom: 1em;
+
+    .UpperRowWrapper {
+      flex-direction: column;
+
+      .MobileMovingHeadlineWrapper {
+        display: block;
+        width: 100%;
+      }
+
+      .Logo {
+        height: 5em;
+        width: 5em;
+      }
+
+      .UpperColumn {
+        overflow: hidden;
+
+        .PcMovingHeadlineWrapper {
+          display: none;
+        }
+
+        .EIINBox {
+          display: none;
+        }
+
+        .TitleWrapper {
+          margin: 0;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 0 2em 0 0;
+
+          h1 {
+            font-size: 1em;
+          }
+
+          .MobileMenuWrapper {
+            margin-top: 1em;
+            display: flex;
+
+            button {
+              border-radius: 0;
+              font-family: Aleo, Arial, Helvetica, sans-serif;
+              font-size: 0.8em;
+            }
+          }
+        }
+      }
+    }
+
+    .LowerRowWrapper {
+      display: none;
+    }
   }
 }

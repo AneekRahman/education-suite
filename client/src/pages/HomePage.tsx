@@ -126,16 +126,16 @@ export default function HomePage() {
       <div className={styles.HeroWrapper}>
         <div className={styles.BgDarkGradient}></div>
         <Header />
-        <div className={styles.HeroMainTextWrapper}>
+        {/* <div className={styles.HeroMainTextWrapper}>
           <h2>
             Excellence in
             <br />
             Knowledge
           </h2>
         </div>
-        <EventsBox />
+        <EventsBox /> */}
       </div>
-      <MessagesRow />
+      {/* <MessagesRow />
       <div className={styles.WigglyBg1Wrapper}>
         <img src="/assets/wiggly-bg1.svg" className={styles.WiggleBg1} alt="" />
         <NoticeBox />
@@ -145,7 +145,7 @@ export default function HomePage() {
         <EventsImageGrid />
       </div>
       <LocationAboutBox />
-      <Footer />
+      <Footer /> */}
     </div>
   );
 }
