@@ -60,6 +60,8 @@ $paddingLeftHeader: 6vw;
     min-height: 100vh;
     width: 100vw;
     background-image: url("../../public//assets/hero-bg1.jpg");
+    background-size: cover;
+    background-position: center;
     position: relative;
 
     .BgDarkGradient {
@@ -243,6 +245,60 @@ $paddingLeftHeader: 6vw;
               background-color: rgba(0, 0, 0, 0.25);
             }
           }
+        }
+      }
+    }
+  }
+
+  .EventsImageGrid {
+    margin-top: 10em;
+
+    h3 {
+      margin-left: 4em;
+      font-weight: 900;
+      font-size: 1.5em;
+      margin-bottom: 2em;
+    }
+
+    .Event {
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      position: relative;
+      color: white;
+
+      &:hover .ReadMoreBox {
+        height: 7em;
+      }
+
+      &:hover .TextWrapper {
+        opacity: 0.6;
+      }
+
+      .ReadMoreBox {
+        position: absolute;
+        background-color: #f07070;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        height: 0em;
+        transition: 0.3s;
+
+        p {
+          text-align: center;
+          font-weight: 900;
+        }
+      }
+
+      .TextWrapper {
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+        padding: 1.3em;
+        transition: 0.3s;
+
+        h4 {
+          font-family: Aleo, Helvetica, Arial, sans-serif;
+          font-size: 1.5em;
         }
       }
     }

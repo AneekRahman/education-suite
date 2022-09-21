@@ -65,35 +65,38 @@ const eventsList: Event[] = [
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
-    photoURL: "",
+    photoURL: "https://i.ytimg.com/vi/9LsQbUav6mc/maxresdefault.jpg",
   },
   {
     date: "MAR 30",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
-    photoURL: "",
+    photoURL:
+      "https://images.hindustantimes.com/img/2021/09/12/1600x900/BANGLADESH-HEALTH-VIRUS-EDUCATION-2_1631428046899_1631428652121.jpg",
   },
   {
     date: "AUG 12",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
-    photoURL: "",
+    photoURL:
+      "https://www.wsws.org/asset/096bbd60-25da-4841-a324-7aaad9e57093?rendition=image1280",
   },
   {
     date: "MAR 30",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
-    photoURL: "",
+    photoURL:
+      "https://www.gage.odi.org/wp-content/uploads/2019/12/Students-at-school-in-Chittagong-Bangladesh-c-NBertrams_NB_1418.jpg",
   },
   {
     date: "AUG 12",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
-    photoURL: "",
+    photoURL: "https://ddnews.gov.in/sites/default/files/Bangladesh_86.jpg",
   },
 ];
 
@@ -124,8 +127,9 @@ export default function HomePage() {
 function EventsImageGrid() {
   return (
     <div className={styles.EventsImageGrid}>
+      <h3>EVENTS BOARD</h3>
       <Grid
-        h="100vh"
+        h="90vh"
         templateRows="repeat(8, 1fr)"
         templateColumns="repeat(8, 1fr)"
         gap={6}
@@ -163,12 +167,33 @@ function EventsImageGrid() {
 function EventsImageBox(props: { event: Event }) {
   return (
     <div
+      className={styles.Event}
       style={{
         height: "100%",
         width: "100%",
         backgroundImage: `url(${props.event.photoURL})`,
       }}
-    ></div>
+    >
+      <Flex
+        flexDirection="column"
+        justifyContent="flex-end"
+        className={styles.TextWrapper}
+        height="100%"
+        width="100%"
+      >
+        <Heading noOfLines={3} as="h4">
+          {props.event.title}
+        </Heading>
+        <Text>{props.event.date}</Text>
+      </Flex>
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        className={styles.ReadMoreBox}
+      >
+        <p>READ MORE</p>
+      </Flex>
+    </div>
   );
 }
 
