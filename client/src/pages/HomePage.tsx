@@ -45,7 +45,33 @@ export default function HomePage() {
         </div>
         <EventsBox />
       </div>
+      <MessagesRow />
+
+      <div style={{ height: "30em" }}></div>
     </div>
+  );
+}
+
+function MessagesRow() {
+  return (
+    <Flex className={styles.MessagesRowWrapper} justifyContent="space-evenly">
+      <h3>MESSAGES</h3>
+
+      <Flex className={styles.MessageColumn} alignItems="center">
+        <img src="/assets/mc1.png" alt="" />
+        <div>
+          <h4>MD. ZILLUR RAHMAN</h4>
+          <p>ASSISTANT PRINCIPAL</p>
+        </div>
+      </Flex>
+      <Flex className={styles.MessageColumn} alignItems="center">
+        <img src="/assets/mc1.png" alt="" />
+        <div>
+          <h4>MD. TOFAZZOL HOSSAIN</h4>
+          <p>ASSISTANT TEACHER</p>
+        </div>
+      </Flex>
+    </Flex>
   );
 }
 

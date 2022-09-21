@@ -82,6 +82,49 @@ $paddingLeftHeader: 6vw;
       }
     }
   }
+
+  .MessagesRowWrapper {
+    background-color: #f07070;
+    margin: 0 $paddingLeftHeader;
+    padding: 2em;
+    margin-top: -5em;
+    padding-left: 6em;
+    border-radius: 2em;
+    position: relative;
+    box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      position: absolute;
+      top: 50%;
+      bottom: 0;
+      left: 3em;
+      transform: translateY(-50%) rotateZ(-90deg);
+      font-weight: 900;
+    }
+
+    .MessageColumn {
+      font-weight: 900;
+      color: white;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      img {
+        height: 6em;
+        width: 6em;
+        border-radius: 100em;
+        overflow: hidden;
+        margin-right: 2em;
+      }
+
+      h4 {
+        font-size: 1.4em;
+      }
+    }
+  }
 }
 .Header {
   background-color: rgba(255, 99, 99, 0.73);

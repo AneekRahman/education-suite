@@ -69,7 +69,7 @@ export default function Header() {
               padding="2"
             >
               <Text color="white" fontWeight="800">
-                ESTABLISHED: 1972
+                ESTABLISHED: 1972 AD
               </Text>
               <Divider m="2" orientation="vertical" />
               <Text color="white" fontWeight="800">
