@@ -293,7 +293,8 @@ $mobileMediaThreshold: 1000px;
     }
   }
 
-  .EventsImageGrid {
+  .EventsImageGrid,
+  .MobileEventsList {
     margin-top: 10em;
     position: relative;
 
@@ -346,6 +347,10 @@ $mobileMediaThreshold: 1000px;
         }
       }
     }
+  }
+
+  .MobileEventsList {
+    display: none;
   }
 
   .LocationAboutBox {
@@ -554,6 +559,25 @@ $mobileMediaThreshold: 1000px;
             }
           }
         }
+      }
+    }
+
+    .EventsImageGrid {
+      display: none;
+    }
+    .MobileEventsList {
+      display: block;
+      padding: 0 1em;
+      margin-top: 5em;
+
+      h3 {
+        margin: 0;
+      }
+
+      .EventWrapper {
+        height: 60vw;
+        width: 100%;
+        margin-top: 0.5em;
       }
     }
   }

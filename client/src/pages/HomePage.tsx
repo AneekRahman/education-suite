@@ -140,13 +140,14 @@ export default function HomePage() {
         <img src="/assets/wiggly-bg1.svg" className={styles.WiggleBg1} alt="" />
         <NoticeBox />
       </div>
-      <div style={{ height: "30em" }}></div>
-      {/* <div className={styles.WigglyBg2Wrapper}>
+      <div className={styles.WigglyBg2Wrapper}>
         <img src="/assets/wiggly-bg2.svg" className={styles.WiggleBg2} alt="" />
         <EventsImageGrid />
+        <MobileEventsList />
       </div>
-      <LocationAboutBox />
+      {/* <LocationAboutBox />
       <Footer /> */}
+      <div style={{ height: "30em" }}></div>
     </div>
   );
 }
@@ -281,6 +282,23 @@ function LocationAboutBox() {
         </TableContainer>
       </div>
     </Center>
+  );
+}
+
+function MobileEventsList() {
+  return (
+    <div className={styles.MobileEventsList}>
+      <h3>EVENTS BOARD</h3>
+      {eventsList.map((event: Event) => (
+        <div className={styles.EventWrapper}>
+          <EventsImageBox event={event} />
+        </div>
+      ))}
+      <Spacer h="6" />
+      <Center>
+        <Button colorScheme="red">SHOW ALL EVENTS</Button>
+      </Center>
+    </div>
   );
 }
 
