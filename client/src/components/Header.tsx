@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
+import { FiBook } from "react-icons/fi";
 
 interface MyTab {
   link: string;
@@ -105,6 +106,7 @@ export default function Header() {
               <MenuList>
                 {tab.subTabs.map((subTab) => (
                   <MenuItem
+                    icon={<FiBook />}
                     onClick={(e) => {
                       // Go to this subTabs link
                     }}

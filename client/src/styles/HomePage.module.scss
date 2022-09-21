@@ -1,15 +1,96 @@
+$paddingLeftHeader: 6vw;
+
 .HomePage {
   position: relative;
+  background-color: #ffbdbd;
+
+  .HeroWrapper {
+    padding-bottom: 4em;
+    min-height: 100vh;
+    width: 100vw;
+    background-image: url("../../public//assets/hero-bg1.jpg");
+    position: relative;
+
+    .BgDarkGradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.0970982142857143) 100%
+      );
+    }
+
+    .HeroMainTextWrapper {
+      padding-left: $paddingLeftHeader;
+      padding-top: 7em;
+      position: relative;
+
+      h2 {
+        font-weight: 900;
+        font-size: 3.8em;
+        color: white;
+        text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.5);
+        position: relative;
+      }
+
+      h2::before {
+        content: "";
+        position: absolute;
+        height: 6px;
+        width: 2em;
+        top: -0.3em;
+        border-radius: 1em;
+        background-color: white;
+      }
+    }
+
+    .HeroEventsWrapper {
+      margin: 4em $paddingLeftHeader;
+      color: white;
+      background-color: rgba(255, 255, 255, 0.05);
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2em 2em 2em 5em;
+
+      h3 {
+        position: absolute;
+        top: 50%;
+        bottom: 0;
+        left: 3em;
+        transform: translateY(-50%) rotateZ(-90deg);
+        font-weight: 900;
+      }
+
+      .EventColumn {
+        margin-left: 1em;
+        padding: 1em;
+
+        h4 {
+          font-size: 2em;
+          font-weight: 900;
+          font-family: Limelight, Aleo, Helvetica, Arial, sans-serif;
+        }
+
+        p {
+          font-size: 1.3em;
+          margin-left: 1em;
+        }
+      }
+    }
+  }
 }
 .Header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(255, 99, 99, 0.83);
-  backdrop-filter: saturate(180%) blur(10px);
-  box-shadow: rgb(2 1 1 / 10%) 0px 5px 20px -5px;
+  background-color: rgba(255, 99, 99, 0.73);
+  backdrop-filter: saturate(70%) blur(4px);
+  // box-shadow: rgb(2 1 1 / 10%) 0px 5px 20px -5px;
   width: 100%;
-  padding-left: 6vw;
+  padding-left: $paddingLeftHeader;
+  position: relative;
+  z-index: 1000;
 
   .UpperRowWrapper {
     .Logo {

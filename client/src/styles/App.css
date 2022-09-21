@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Aleo:400,700|Limelight&display=swap");
+* {
+  box-sizing: border-box;
+}
 
 p,
 h1,
