@@ -87,8 +87,12 @@ export default function Header() {
               _hover={{
                 bg: "rgba(0,0,0,0.05)",
               }}
-              _expanded={{
+              _active={{
                 bg: "rgba(0,0,0,0.2)",
+                color: "rgba(255,255,255,.7)",
+              }}
+              _expanded={{
+                bg: "rgba(0,0,0,0.1)",
               }}
               bg="transparent"
               color="white"

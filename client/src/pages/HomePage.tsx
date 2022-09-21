@@ -17,13 +17,13 @@ const eventsList: Event[] = [
     link: "",
   },
   {
-    date: "JAN 8",
+    date: "MAR 30",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
   },
   {
-    date: "JAN 8",
+    date: "AUG 12",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
