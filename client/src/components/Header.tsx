@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
 import { FiBook } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 interface MyTab {
   link: string;
@@ -35,7 +36,19 @@ const tabsList: MyTab[] = [
   },
   { label: "NOTICE", link: "/notice" },
   { label: "CONTACT", link: "/contact" },
-  { label: "RESULTS", link: "/results" },
+  {
+    label: "ADMISSION & E-SHEBA",
+    link: "/results",
+    subTabs: [
+      {
+        label: "Govt. School Admission",
+        link: "https://gsa.teletalk.com.bd/",
+      },
+      { label: "e-School", link: "http://eschool.sib.gov.bd/" },
+      { label: "Pathshala", link: "http://automation.sib.gov.bd/" },
+      { label: "PDS", link: "http://pds.sib.gov.bd/" },
+    ],
+  },
   {
     label: "MESSAGES",
     link: "/messages",
@@ -44,10 +57,12 @@ const tabsList: MyTab[] = [
       { label: "CHAIRMAN'S MESSAGE", link: "/messages/chairman" },
     ],
   },
-  { label: "MORE ABOUT", link: "/about" },
+  { label: "FACULTY", link: "/faculty" },
 ];
 
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.Header}>
       <Flex justifyContent="flex-start" className={styles.UpperRowWrapper}>
@@ -99,8 +114,10 @@ export default function Header() {
               as={Button}
               rightIcon={tab.subTabs !== undefined ? <BiChevronDown /> : null}
               onClick={(e) => {
-                if (tab.subTabs === undefined) {
+                // If there are no subtabs to open, then go straight to the root link given
+                if (tab.subTabs === undefined && tab.link) {
                   // Use router to go to this link
+                  navigate(tab.link);
                 }
               }}
             >
@@ -112,7 +129,18 @@ export default function Header() {
                   <MenuItem
                     icon={<FiBook />}
                     onClick={(e) => {
-                      // Go to this subTabs link
+                      // If the link includes a full url with http, open a new tap
+                      if (subTab.link && subTab.link.includes("http")) {
+                        const newWindow = window.open(
+                          subTab.link,
+                          "_blank",
+                          "noopener,noreferrer"
+                        );
+                        if (newWindow) newWindow.opener = null;
+                      } else {
+                        // Otherwise if its a relative url
+                        navigate(subTab.link);
+                      }
                     }}
                   >
                     {subTab.label}

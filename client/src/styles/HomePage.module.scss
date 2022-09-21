@@ -332,6 +332,48 @@ $paddingLeftHeader: 6vw;
       padding: 1em;
     }
   }
+
+  .FooterWrapper {
+    color: white;
+    background-color: #f07070;
+    margin-top: 6em;
+
+    .GridWrapper {
+      padding: 3em;
+
+      h3 {
+        font-size: 1.8em;
+        font-weight: 900;
+        margin-bottom: 1em;
+        font-family: Aleo, Helvetica, Arial, sans-serif;
+      }
+
+      p {
+        margin-bottom: 0.4em;
+        font-size: 1.3em;
+        position: relative;
+        padding-left: 1em;
+
+        &::before {
+          content: "";
+          position: absolute;
+          height: 10px;
+          width: 10px;
+          left: 0;
+          top: 35%;
+          background-color: white;
+          border-radius: 1em;
+        }
+      }
+    }
+
+    .CopyRightWrapper {
+      padding: 1em;
+      font-size: 1em;
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
 }
 
 @keyframes movingHeadline {
