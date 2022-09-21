@@ -45,13 +45,12 @@
   }
 
   .LowerRowWrapper {
+    margin-top: 1em;
+
     button {
-      font-family: Aleo;
+      font-family: Aleo, Helvetica, Arial, sans-serif;
       font-weight: 900;
-      padding: 0.5em 2em;
-      color: white;
       border-radius: 0;
-      border-bottom: 2px solid white;
     }
   }
 }
