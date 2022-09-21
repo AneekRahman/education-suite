@@ -1,12 +1,21 @@
 import React from "react";
 import Header from "../components/Header";
 import styles from "../styles/HomePage.module.scss";
-import { Flex, Heading, Text, Button, Center } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Text,
+  Button,
+  Center,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 
 interface Event {
   date: string; // Jan 8
   title: string;
   link: string;
+  photoURL: string;
 }
 
 interface Notice {
@@ -15,6 +24,7 @@ interface Notice {
   link: string;
 }
 
+// 10 Notices will be fetched from Firestore
 const noticesList: Notice[] = [
   {
     date: "March 26, 2018",
@@ -48,24 +58,42 @@ const noticesList: Notice[] = [
   },
 ];
 
+// 5 events will be fetched from Firestore
 const eventsList: Event[] = [
   {
     date: "JAN 8",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
+    photoURL: "",
   },
   {
     date: "MAR 30",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
+    photoURL: "",
   },
   {
     date: "AUG 12",
     title:
       " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
     link: "",
+    photoURL: "",
+  },
+  {
+    date: "MAR 30",
+    title:
+      " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
+    link: "",
+    photoURL: "",
+  },
+  {
+    date: "AUG 12",
+    title:
+      " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
+    link: "",
+    photoURL: "",
   },
 ];
 
@@ -86,9 +114,61 @@ export default function HomePage() {
       </div>
       <MessagesRow />
       <NoticeBox />
+      <EventsImageGrid />
 
       <div style={{ height: "30em" }}></div>
     </div>
+  );
+}
+
+function EventsImageGrid() {
+  return (
+    <div className={styles.EventsImageGrid}>
+      <Grid
+        h="100vh"
+        templateRows="repeat(8, 1fr)"
+        templateColumns="repeat(8, 1fr)"
+        gap={6}
+      >
+        {eventsList[0] ? (
+          <GridItem colSpan={3} rowSpan={4} bg="rgba(0,0,0,0.1)">
+            <EventsImageBox event={eventsList[0]} />
+          </GridItem>
+        ) : null}
+        {eventsList[1] ? (
+          <GridItem colSpan={5} rowSpan={5} bg="rgba(0,0,0,0.1)">
+            <EventsImageBox event={eventsList[1]} />
+          </GridItem>
+        ) : null}
+        {eventsList[2] ? (
+          <GridItem colSpan={3} rowSpan={4} bg="rgba(0,0,0,0.1)">
+            <EventsImageBox event={eventsList[2]} />
+          </GridItem>
+        ) : null}
+        {eventsList[3] ? (
+          <GridItem colSpan={3} rowSpan={3} bg="rgba(0,0,0,0.1)">
+            <EventsImageBox event={eventsList[3]} />
+          </GridItem>
+        ) : null}
+        {eventsList[4] ? (
+          <GridItem colSpan={2} rowSpan={3} bg="rgba(0,0,0,0.1)">
+            <EventsImageBox event={eventsList[4]} />
+          </GridItem>
+        ) : null}
+      </Grid>
+    </div>
+  );
+}
+
+function EventsImageBox(props: { event: Event }) {
+  return (
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        backgroundImage: `url(${props.event.photoURL})`,
+      }}
+    ></div>
   );
 }
 
