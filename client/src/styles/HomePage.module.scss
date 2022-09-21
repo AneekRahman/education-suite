@@ -514,7 +514,6 @@ $mobileMediaThreshold: 1000px;
       width: 100%;
 
       h3 {
-        // display: none;
         transform: none;
         top: -2.5em;
         left: 0;
@@ -534,6 +533,26 @@ $mobileMediaThreshold: 1000px;
         p {
           margin-top: 0.2em;
           font-size: 0.8em;
+        }
+      }
+    }
+
+    .NoticeBoxWrapper {
+      margin: 3em 1.5em;
+
+      .NoticeBoxInnerWrapper {
+        max-width: 100%;
+        padding: 1em;
+
+        .NoticesWrapper {
+          .Notice {
+            h4 {
+              font-size: 1em;
+            }
+            p {
+              font-size: 0.8em;
+            }
+          }
         }
       }
     }
