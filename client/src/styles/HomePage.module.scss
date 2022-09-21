@@ -361,15 +361,16 @@ $mobileMediaThreshold: 1000px;
     font-family: Aleo, Arial, Helvetica, sans-serif;
     font-weight: 900;
 
-    .TextsWrapper {
-      background-color: black;
-      padding: 1em;
+    .LocationAboutBoxWrapper {
+      .TextsWrapper {
+        background-color: black;
+        padding: 1em;
 
-      p {
-        font-size: 2em;
+        p {
+          font-size: 2em;
+        }
       }
     }
-
     .Table {
       padding: 1em;
     }
@@ -578,6 +579,20 @@ $mobileMediaThreshold: 1000px;
         height: 60vw;
         width: 100%;
         margin-top: 0.5em;
+      }
+    }
+    .LocationAboutBox {
+      width: 90vw;
+
+      .LocationAboutBoxWrapper {
+        flex-direction: column;
+
+        .TextsWrapper {
+          p {
+            margin-top: 0.5em;
+            font-size: 1.5em;
+          }
+        }
       }
     }
   }

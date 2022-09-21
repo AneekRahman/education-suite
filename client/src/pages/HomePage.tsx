@@ -145,8 +145,8 @@ export default function HomePage() {
         <EventsImageGrid />
         <MobileEventsList />
       </div>
-      {/* <LocationAboutBox />
-      <Footer /> */}
+      <LocationAboutBox />
+      {/* <Footer /> */}
       <div style={{ height: "30em" }}></div>
     </div>
   );
@@ -236,7 +236,7 @@ function LocationAboutBox() {
   return (
     <Center marginTop="4em">
       <div className={styles.LocationAboutBox}>
-        <Flex>
+        <Flex className={styles.LocationAboutBoxWrapper}>
           <div className={styles.TextsWrapper}>
             <Heading as="h3">FIND OUR LOCATION</Heading>
             <Flex height="100%" alignItems="center">
@@ -244,12 +244,15 @@ function LocationAboutBox() {
             </Flex>
           </div>
 
-          <div className="google-map-code" style={{ width: "100%" }}>
+          <div
+            className="GoogleMapWrapper"
+            style={{ width: "100%", height: "500px" }}
+          >
             <iframe
               title="Map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d933172.7474488!2d89.06958384789172!3d23.98850011048644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe831cd164c30f%3A0x24068820884fc22!2z4KaV4Kav4Ka84Kaw4Ka-4Kas4Ka-4Kah4Ka84Ka_IOCmrOCmueCngeCmruCngeCmluCngCDgpongpprgp43gppog4Kas4Ka_4Kam4KeN4Kav4Ka-4Kay4Kav4Ka8!5e0!3m2!1sen!2sbd!4v1663787881846!5m2!1sen!2sbd"
               width="100%"
-              height="500px"
+              height="100%"
               frameBorder="0"
               style={{ border: 0 }}
               allowFullScreen={false}
