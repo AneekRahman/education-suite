@@ -27,7 +27,7 @@ function NoticeBoard() {
           </div>
         ))}
         <Center>
-          <Button colorScheme="red">LOAD MORE</Button>
+          <Button colorScheme="red">LOAD MORE NOTICES</Button>
         </Center>
       </div>
     </div>
