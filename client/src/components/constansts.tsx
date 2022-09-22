@@ -29,33 +29,37 @@ export const MAIN_PHONE_NUMBER = "০২-৫৮১৫৫৮৭১";
 
 export const tabsList: MyTab[] = [
   { label: "HOME", link: "/" },
-  {
-    label: "ACADEMICS",
-    link: "/academics",
-    subTabs: [
-      { label: "BANGLA", link: "/academics/bangla" },
-      { label: "ENGLISH", link: "/academics/english" },
-      { label: "MATHEMATICS", link: "/academics/mathematics" },
-      { label: "PHYSICS", link: "/academics/physics" },
-      { label: "CHEMISTRY", link: "/academics/chemistry" },
-      { label: "BIOLOGY", link: "/academics/biology" },
-    ],
-  },
-  { label: "NOTICE", link: "/notice" },
-  { label: "CONTACT", link: "/contact" },
+  // {
+  //   label: "ACADEMICS",
+  //   link: "/academics",
+  //   subTabs: [
+  //     { label: "BANGLA", link: "/academics/bangla" },
+  //     { label: "ENGLISH", link: "/academics/english" },
+  //     { label: "MATHEMATICS", link: "/academics/mathematics" },
+  //     { label: "PHYSICS", link: "/academics/physics" },
+  //     { label: "CHEMISTRY", link: "/academics/chemistry" },
+  //     { label: "BIOLOGY", link: "/academics/biology" },
+  //   ],
+  // },
   {
     label: "ADMISSION & E-SHEBA",
-    link: "/results",
+    link: "/",
     subTabs: [
       {
         label: "Govt. School Admission",
         link: "https://gsa.teletalk.com.bd/",
       },
-      { label: "e-School", link: "http://eschool.sib.gov.bd/" },
+      {
+        label: "BOARD EXAM RESULTS",
+        link: "https://eboardresults.com/v2/home",
+      },
       { label: "Pathshala", link: "http://automation.sib.gov.bd/" },
       { label: "PDS", link: "http://pds.sib.gov.bd/" },
     ],
   },
+  { label: "NOTICE", link: "/notice" },
+  { label: "CONTACT", link: "/contact" },
+  { label: "FACULTY", link: "/faculty" },
   {
     label: "MESSAGES",
     link: "/messages",
@@ -64,7 +68,36 @@ export const tabsList: MyTab[] = [
       { label: "CHAIRMAN'S MESSAGE", link: "/messages/chairman" },
     ],
   },
-  { label: "FACULTY", link: "/faculty" },
+  {
+    label: "ED. MINISTRY",
+    link: "/",
+    subTabs: [
+      {
+        label: "SECONDARY & HIGHER EDUCATION DIVISION",
+        link: "http://www.shed.gov.bd/",
+      },
+      {
+        label: "NATIONAL CURRICULUM & TEXT-BOOK BOARD",
+        link: "http://www.nctb.gov.bd/",
+      },
+      {
+        label: "NATIONAL ACADEMY FOR EDUCATIONAL MANAGEMENT",
+        link: "http://www.naem.gov.bd/",
+      },
+      {
+        label: "BANBEIS",
+        link: "http://www.banbeis.gov.bd/",
+      },
+      {
+        label: "MINISTRY OF PRIMARY AND MASS EDUCATION",
+        link: "http://www.mopme.gov.bd/",
+      },
+      {
+        label: "ISEB RESULTS",
+        link: "http://www.educationboardresults.gov.bd/",
+      },
+    ],
+  },
 ];
 
 export const movingHealine: string = `অবিভক্ত ব্রিটিশ বাংলার উনিশ শতকের দ্বিতীয়ার্ধের শুরুতে আধুনিক

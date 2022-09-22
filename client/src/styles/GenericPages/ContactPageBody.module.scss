@@ -1,5 +1,3 @@
-@import "../constants.scss";
-
 .ContactPageBody {
   padding: 1em;
 
@@ -7,6 +5,7 @@
     overflow-y: scroll;
     box-shadow: 0 3px 5px 5px rgba($color: #000000, $alpha: 0.04);
     font-family: Aleo, Helvetica;
+    min-width: 50vw;
 
     h3 {
       padding: 1em;

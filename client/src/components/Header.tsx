@@ -201,7 +201,7 @@ function LowerRowMenu() {
             {tab.label}
           </MenuButton>
           {tab.subTabs !== undefined ? (
-            <MenuList>
+            <MenuList borderRadius={0}>
               {tab.subTabs.map((subTab) => (
                 <MenuItem
                   icon={<FiBook />}

@@ -11,6 +11,7 @@ import "./styles/App.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import GenericPage from "./pages/GenericPages/GenericPage";
 import ContactPageBody from "./pages/GenericPages/ContactPageBody";
+import NoticePageBody from "./pages/GenericPages/NoticePageBody";
 
 function App() {
   return (
@@ -27,9 +28,7 @@ function App() {
             />
             <Route
               path="/notice"
-              element={
-                <GenericPage title="NOTICE" body={<ContactPageBody />} />
-              }
+              element={<GenericPage title="NOTICE" body={<NoticePageBody />} />}
             />
             <Route
               path="/messages/principal"
