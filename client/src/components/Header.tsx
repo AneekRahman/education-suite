@@ -1,4 +1,4 @@
-import styles from "../styles/HomePage.module.scss";
+import styles from "../styles/HeaderAndFooter.module.scss";
 import {
   Box,
   Flex,
