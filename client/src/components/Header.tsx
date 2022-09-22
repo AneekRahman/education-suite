@@ -291,7 +291,7 @@ function EIINBox() {
       display="flex"
     >
       <Text color="white" fontWeight="800">
-        ESTABLISHED: 1972 AD
+        ESTABLISHED: 1972
       </Text>
       <Divider m="2" orientation="vertical" />
       <Text color="white" fontWeight="800">
