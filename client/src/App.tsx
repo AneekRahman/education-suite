@@ -7,6 +7,9 @@ import {
 import HomePage from "./pages/HomePage";
 import "./styles/App.css";
 
+// Initiate firebase
+import "./components/firebase";
+
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from "@chakra-ui/react";
 import GenericPage from "./pages/GenericPages/GenericPage";
