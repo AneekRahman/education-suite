@@ -308,63 +308,6 @@
 }
 
 @media screen and (max-width: $mobileMediaThreshold) {
-  .Header {
-    padding: 0;
-    padding-bottom: 1em;
-
-    .UpperRowWrapper {
-      flex-direction: column;
-
-      .MobileMovingHeadlineWrapper {
-        display: block;
-        width: 100%;
-      }
-
-      .Logo {
-        height: 5em;
-        width: 5em;
-      }
-
-      .UpperColumn {
-        overflow: hidden;
-
-        .PcMovingHeadlineWrapper {
-          display: none;
-        }
-
-        .EIINBox {
-          display: none;
-        }
-
-        .TitleWrapper {
-          margin: 0;
-          flex-direction: column;
-          align-items: flex-start;
-          padding: 0 2em 0 0;
-
-          h1 {
-            font-size: 1em;
-          }
-
-          .MobileMenuWrapper {
-            margin-top: 1em;
-            display: flex;
-
-            button {
-              border-radius: 0;
-              font-family: Aleo, Arial, Helvetica, sans-serif;
-              font-size: 0.8em;
-            }
-          }
-        }
-      }
-    }
-
-    .LowerRowWrapper {
-      display: none;
-    }
-  }
-
   .HomePage {
     .HeroWrapper {
       .HeroMainTextWrapper {
@@ -471,12 +414,6 @@
             font-size: 1.5em;
           }
         }
-      }
-    }
-
-    .FooterWrapper {
-      .GridWrapper {
-        grid-template-columns: repeat(auto-fill, 100%);
       }
     }
   }

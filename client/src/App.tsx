@@ -22,9 +22,40 @@ function App() {
             <Route
               path="/contact"
               element={
-                <GenericPage title="HELLOOOO" body={<ContactPageBody />} />
+                <GenericPage title="CONTACT" body={<ContactPageBody />} />
               }
             />
+            <Route
+              path="/notice"
+              element={
+                <GenericPage title="NOTICE" body={<ContactPageBody />} />
+              }
+            />
+            <Route
+              path="/messages/principal"
+              element={
+                <GenericPage
+                  title="PRINCIPAL'S MESSAGE"
+                  body={<ContactPageBody />}
+                />
+              }
+            />
+            <Route
+              path="/messages/chairman"
+              element={
+                <GenericPage
+                  title="CHAIRMAN'S MESSAGE"
+                  body={<ContactPageBody />}
+                />
+              }
+            />
+            <Route
+              path="/faculty"
+              element={
+                <GenericPage title="FACULTY" body={<ContactPageBody />} />
+              }
+            />
+            {/* If any not found links are requested go to home page */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>
