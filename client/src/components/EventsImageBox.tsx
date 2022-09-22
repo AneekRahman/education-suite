@@ -1,18 +1,16 @@
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { Event } from "./constansts";
 import styles from "../styles/EventsImageBox.module.scss";
 
 export function EventsImageBox(props: { event: Event }) {
   return (
-    <div
-      className={styles.Event}
-      style={{
-        height: "100%",
-        width: "100%",
-        backgroundImage: `url(${props.event.photoURL})`,
-      }}
-    >
+    <div className={styles.Event}>
+      <Image
+        objectFit="cover"
+        className={styles.Image}
+        src={props.event.photoURL}
+      />
       <Flex
         flexDirection="column"
         justifyContent="flex-end"

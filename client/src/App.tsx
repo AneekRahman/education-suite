@@ -13,6 +13,7 @@ import GenericPage from "./pages/GenericPages/GenericPage";
 import ContactPageBody from "./pages/GenericPages/ContactPageBody";
 import NoticePageBody from "./pages/GenericPages/NoticePageBody";
 import EventsPageBody from "./pages/GenericPages/EventsPageBody";
+import FacultyPageBody from "./pages/GenericPages/FacultyPageBody";
 
 function App() {
   return (
@@ -56,7 +57,7 @@ function App() {
             <Route
               path="/faculty"
               element={
-                <GenericPage title="FACULTY" body={<ContactPageBody />} />
+                <GenericPage title="FACULTY" body={<FacultyPageBody />} />
               }
             />
             {/* If any not found links are requested go to home page */}
