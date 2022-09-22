@@ -1,15 +1,58 @@
 .EventsPageBody {
-  padding: 1em;
+  padding: 3em;
 
-  .EventsWrapper {
-    box-shadow: 0 3px 5px 5px rgba($color: #000000, $alpha: 0.04);
-    font-family: Aleo, Helvetica;
-    min-width: 60vw;
+  h3 {
+    padding: 1em;
+    font-weight: 900;
+    font-size: 1.3em;
+  }
 
-    h3 {
-      padding: 1em;
-      font-weight: 900;
-      font-size: 1.3em;
+  .EventWrapper {
+    height: 60vw;
+    width: 100%;
+    margin-top: 0.5em;
+
+    .Event {
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      position: relative;
+      color: white;
+
+      &:hover .ReadMoreBox {
+        height: 20%;
+      }
+
+      &:hover .TextWrapper {
+        opacity: 0.6;
+      }
+
+      .ReadMoreBox {
+        position: absolute;
+        background-color: #f07070;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        height: 0em;
+        transition: 0.3s;
+
+        p {
+          text-align: center;
+          font-weight: 900;
+        }
+      }
+
+      .TextWrapper {
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+        padding: 1.3em;
+        transition: 0.3s;
+
+        h4 {
+          font-family: Aleo, Helvetica, Arial, sans-serif;
+          font-size: 1.5em;
+        }
+      }
     }
   }
 }

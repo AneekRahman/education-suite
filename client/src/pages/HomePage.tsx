@@ -23,6 +23,7 @@ import {
   noticesList,
 } from "../components/constansts";
 import { Link } from "react-router-dom";
+import { EventsImageBox } from "../components/EventsImageBox";
 
 export default function HomePage() {
   return (
@@ -168,39 +169,6 @@ function EventsImageGrid() {
       <Center>
         <Button colorScheme="red">SHOW ALL EVENTS</Button>
       </Center>
-    </div>
-  );
-}
-
-function EventsImageBox(props: { event: Event }) {
-  return (
-    <div
-      className={styles.Event}
-      style={{
-        height: "100%",
-        width: "100%",
-        backgroundImage: `url(${props.event.photoURL})`,
-      }}
-    >
-      <Flex
-        flexDirection="column"
-        justifyContent="flex-end"
-        className={styles.TextWrapper}
-        height="100%"
-        width="100%"
-      >
-        <Heading noOfLines={3} as="h4">
-          {props.event.title}
-        </Heading>
-        <Text>{props.event.date}</Text>
-      </Flex>
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        className={styles.ReadMoreBox}
-      >
-        <p>READ MORE</p>
-      </Flex>
     </div>
   );
 }

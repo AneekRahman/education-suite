@@ -1,0 +1,42 @@
+.Event {
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  position: relative;
+  color: white;
+
+  &:hover .ReadMoreBox {
+    height: 20%;
+  }
+
+  &:hover .TextWrapper {
+    opacity: 0.6;
+  }
+
+  .ReadMoreBox {
+    position: absolute;
+    background-color: #f07070;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 0em;
+    transition: 0.3s;
+
+    p {
+      text-align: center;
+      font-weight: 900;
+    }
+  }
+
+  .TextWrapper {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+    padding: 1.3em;
+    transition: 0.3s;
+
+    h4 {
+      font-family: Aleo, Helvetica, Arial, sans-serif;
+      font-size: 1.5em;
+    }
+  }
+}

@@ -1,5 +1,8 @@
+@import "../constants.scss";
+
 .NoticePageBody {
   padding: 1em;
+  margin-bottom: 2em;
 
   .NoticeBoardWrapper {
     overflow-y: scroll;
@@ -45,6 +48,23 @@
             height: 3px;
             width: 1.3em;
             background-color: rgba(0, 0, 0, 0.25);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mobileMediaThreshold) {
+  .NoticePageBody {
+    .NoticeBoardWrapper {
+      .NoticesWrapper {
+        .Notice {
+          h4 {
+            font-size: 1em;
+          }
+          p {
+            font-size: 0.8em;
           }
         }
       }

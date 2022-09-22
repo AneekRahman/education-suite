@@ -24,7 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
 import { FiBook, FiMenu } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { movingHealine, MyTab, SITENAME, tabsList } from "./constansts";
 
 export default function Header() {
@@ -62,15 +62,17 @@ function UpperColumNextToLogo() {
           justifyContent="space-between"
           width="100%"
         >
-          <Button
-            p=".7em 1.5em 0.5em"
-            bg="rgba(0,0,0,0.08)"
-            color="white"
-            colorScheme="blackAlpha"
-            as={Button}
-          >
-            HOME
-          </Button>
+          <Link to="/">
+            <Button
+              p=".7em 1.5em 0.5em"
+              bg="rgba(0,0,0,0.08)"
+              color="white"
+              colorScheme="blackAlpha"
+              as={Button}
+            >
+              HOME
+            </Button>
+          </Link>
           <DrawerButton />
         </Flex>
       </Flex>
