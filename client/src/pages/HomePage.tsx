@@ -167,7 +167,9 @@ function EventsImageGrid() {
       </Grid>
       <Spacer h="10" />
       <Center>
-        <Button colorScheme="red">SHOW ALL EVENTS</Button>
+        <Link to="/events">
+          <Button colorScheme="red">SHOW ALL EVENTS</Button>
+        </Link>
       </Center>
     </div>
   );
