@@ -75,15 +75,15 @@ export default function Footer() {
       <div className={styles.CopyRightWrapper}>
         <Center>
           <Text as="span">
+            Copyright © {new Date().getFullYear()} All rights reserved:{" "}
             <ChakraLink
               href="https://studios.baalish.com"
               color="rgb(253, 255, 118)"
               isExternal
             >
-              <u>baalish Studios</u>
+              <u>baalish studios</u>
             </ChakraLink>{" "}
-            Education Suite Copyright © {new Date().getFullYear()} All rights
-            reserved.
+            Education Suite
           </Text>
         </Center>
       </div>

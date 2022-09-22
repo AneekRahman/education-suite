@@ -12,6 +12,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import GenericPage from "./pages/GenericPages/GenericPage";
 import ContactPageBody from "./pages/GenericPages/ContactPageBody";
 import NoticePageBody from "./pages/GenericPages/NoticePageBody";
+import EventsPageBody from "./pages/GenericPages/EventsPageBody";
 
 function App() {
   return (
@@ -32,9 +33,7 @@ function App() {
             />
             <Route
               path="/events"
-              element={
-                <GenericPage title="EVENTS" body={<ContactPageBody />} />
-              }
+              element={<GenericPage title="EVENTS" body={<EventsPageBody />} />}
             />
             <Route
               path="/messages/principal"
