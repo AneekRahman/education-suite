@@ -9,7 +9,8 @@ import "./styles/App.css";
 
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from "@chakra-ui/react";
-import ContactPage from "./pages/ContactPage";
+import GenericPage from "./pages/GenericPages/GenericPage";
+import ContactPageBody from "./pages/GenericPages/ContactPageBody";
 
 function App() {
   return (
@@ -18,7 +19,12 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route
+              path="/contact"
+              element={
+                <GenericPage title="HELLOOOO" body={<ContactPageBody />} />
+              }
+            />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>
