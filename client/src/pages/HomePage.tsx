@@ -146,8 +146,7 @@ export default function HomePage() {
         <MobileEventsList />
       </div>
       <LocationAboutBox />
-      {/* <Footer /> */}
-      <div style={{ height: "30em" }}></div>
+      <Footer />
     </div>
   );
 }
