@@ -80,7 +80,6 @@
 .FooterWrapper {
   color: white;
   background-color: #f07070;
-  margin-top: 6em;
 
   .GridWrapper {
     padding: 3em;
@@ -180,6 +179,13 @@
   .FooterWrapper {
     .GridWrapper {
       grid-template-columns: repeat(auto-fill, 100%);
+
+      h3 {
+        font-size: 1.3em;
+      }
+      p {
+        font-size: 1em;
+      }
     }
   }
 }

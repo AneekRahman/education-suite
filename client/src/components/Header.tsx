@@ -25,58 +25,7 @@ import {
 import { BiChevronDown } from "react-icons/bi";
 import { FiBook, FiMenu } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-
-interface MyTab {
-  link: string;
-  label: string;
-  subTabs?: { link: string; label: string }[];
-}
-
-const SITENAME = "কয়রাবারী বহুমুখী উচ্চ বিদ্যালয়, পাবনা";
-
-const tabsList: MyTab[] = [
-  { label: "HOME", link: "/" },
-  {
-    label: "ACADEMICS",
-    link: "/academics",
-    subTabs: [
-      { label: "BANGLA", link: "/academics/bangla" },
-      { label: "ENGLISH", link: "/academics/english" },
-      { label: "MATHEMATICS", link: "/academics/mathematics" },
-      { label: "PHYSICS", link: "/academics/physics" },
-      { label: "CHEMISTRY", link: "/academics/chemistry" },
-      { label: "BIOLOGY", link: "/academics/biology" },
-    ],
-  },
-  { label: "NOTICE", link: "/notice" },
-  { label: "CONTACT", link: "/contact" },
-  {
-    label: "ADMISSION & E-SHEBA",
-    link: "/results",
-    subTabs: [
-      {
-        label: "Govt. School Admission",
-        link: "https://gsa.teletalk.com.bd/",
-      },
-      { label: "e-School", link: "http://eschool.sib.gov.bd/" },
-      { label: "Pathshala", link: "http://automation.sib.gov.bd/" },
-      { label: "PDS", link: "http://pds.sib.gov.bd/" },
-    ],
-  },
-  {
-    label: "MESSAGES",
-    link: "/messages",
-    subTabs: [
-      { label: "PRINCIPAL'S MESSAGE", link: "/messages/principal" },
-      { label: "CHAIRMAN'S MESSAGE", link: "/messages/chairman" },
-    ],
-  },
-  { label: "FACULTY", link: "/faculty" },
-];
-
-const movingHealine: string = `অবিভক্ত ব্রিটিশ বাংলার উনিশ শতকের দ্বিতীয়ার্ধের শুরুতে আধুনিক
-              শিক্ষা বিষয়ক ঐতিহাসিক নীতিমালা আশ্রয় করে কলেজস্তরের শিক্ষা
-              প্রসারে সম্ভাবনার সৃষ্টি করে`;
+import { movingHealine, MyTab, SITENAME, tabsList } from "./constansts";
 
 export default function Header() {
   return (
