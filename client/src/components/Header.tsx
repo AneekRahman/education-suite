@@ -141,6 +141,8 @@ function MobileDrawerAccordionMenu() {
                   backgroundColor="transparent"
                   borderRadius={0}
                   width="100%"
+                  height="max-content"
+                  whiteSpace="normal"
                   onClick={(e) => {
                     // If the link includes a full url with http, open a new tap
                     if (subTab.link && subTab.link.includes("http")) {
