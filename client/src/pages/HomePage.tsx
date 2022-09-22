@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/Header";
 import styles from "../styles/HomePage.module.scss";
 import {
@@ -23,6 +22,7 @@ import {
   Notice,
   noticesList,
 } from "../components/constansts";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
@@ -220,7 +220,11 @@ function NoticeBox() {
             </div>
           ))}
           <Center>
-            <Button colorScheme="red">SHOW ALL NOTICES</Button>
+            <Link to="/notice">
+              <Button zIndex={1000} colorScheme="red">
+                SHOW ALL NOTICES
+              </Button>
+            </Link>
           </Center>
         </div>
       </div>

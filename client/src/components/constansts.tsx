@@ -46,18 +46,19 @@ export const tabsList: MyTab[] = [
     link: "/",
     subTabs: [
       {
-        label: "Govt. School Admission",
+        label: "GENERAL SCHOOL ADMISSION",
         link: "https://gsa.teletalk.com.bd/",
       },
       {
         label: "BOARD EXAM RESULTS",
         link: "https://eboardresults.com/v2/home",
       },
-      { label: "Pathshala", link: "http://automation.sib.gov.bd/" },
+      { label: "PATHSHALA", link: "http://automation.sib.gov.bd/" },
       { label: "PDS", link: "http://pds.sib.gov.bd/" },
     ],
   },
   { label: "NOTICE", link: "/notice" },
+  { label: "EVENTS", link: "/events" },
   { label: "CONTACT", link: "/contact" },
   { label: "FACULTY", link: "/faculty" },
   {

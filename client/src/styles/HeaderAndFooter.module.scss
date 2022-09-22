@@ -28,12 +28,13 @@
       p {
         color: white;
         padding: 0.5em 1em;
-        animation: movingHeadline 20s linear infinite;
-        cursor: pointer;
+        animation: movingHeadline 30s linear infinite;
+        // cursor: pointer;
         white-space: nowrap;
 
         &:hover {
-          color: rgb(0, 132, 197);
+          // color: rgb(0, 132, 197);
+          animation-delay: 1000s;
         }
       }
     }
