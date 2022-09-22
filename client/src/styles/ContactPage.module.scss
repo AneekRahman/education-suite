@@ -1,0 +1,38 @@
+.ContactPage {
+  position: relative;
+  background-color: #ffbdbd;
+  background-image: url(../../public/assets/logo-bg-repeated-pattern.png);
+  min-height: 100vh;
+
+  .HeroWrapper {
+    min-height: calc(35vh + 6em);
+    width: 100vw;
+    background-image: url("../../public//assets/hero-bg1.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+    .BgDarkGradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.0970982142857143) 100%
+      );
+    }
+
+    .HeroMainTextWrapper {
+      position: relative;
+
+      h2 {
+        color: white;
+        font-weight: 900;
+        font-size: 2em;
+      }
+    }
+  }
+}
