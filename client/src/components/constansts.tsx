@@ -87,7 +87,7 @@ export const tabsList: MyTab[] = [
     link: "/messages",
     subTabs: [
       { label: "PRINCIPAL'S MESSAGE", link: "/messages/principal" },
-      { label: "CHAIRMAN'S MESSAGE", link: "/messages/chairman" },
+      { label: "PRESIDENT'S MESSAGE", link: "/messages/president" },
     ],
   },
   {
