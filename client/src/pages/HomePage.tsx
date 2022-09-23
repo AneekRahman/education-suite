@@ -24,8 +24,34 @@ import {
 } from "../components/constansts";
 import { Link } from "react-router-dom";
 import { EventsImageBox } from "../components/EventsImageBox";
+import { useEffect, useState } from "react";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+
+interface SiteInfo {
+  eiin: number;
+  established: number;
+  movingHeader?: {
+    label: string;
+    link: string;
+  };
+  sitename: string;
+}
 
 export default function HomePage() {
+  const [siteInfo, setsiteInfo] = useState<SiteInfo>({
+    eiin: 0,
+    established: 0,
+    sitename: "",
+  });
+
+  // componentDidMount
+  useEffect(() => {
+    getDoc(doc(getFirestore(), "siteInfo/default")).then((snapshot) => {
+      if (snapshot.exists()) {
+      }
+    });
+  }, []);
+
   return (
     <div className={styles.HomePage}>
       <div className={styles.HeroWrapper}>
