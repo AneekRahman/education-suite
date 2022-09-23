@@ -190,6 +190,15 @@ export class FirestoreRequests {
     }
   };
 
+  static getSingleNotice = async (
+    eventUid: string
+  ): Promise<Notice | undefined> => {
+    const snapshot = await getDoc(doc(getFirestore(), `notices/${eventUid}`));
+    if (snapshot.exists()) {
+      return snapshot.data() as Notice;
+    }
+  };
+
   // Get newest notices from /notices/
   static getNotices = async (
     docsLimit: number,
