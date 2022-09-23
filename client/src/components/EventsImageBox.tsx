@@ -3,13 +3,13 @@ import React from "react";
 import { Event } from "./constansts";
 import styles from "../styles/EventsImageBox.module.scss";
 
-export function EventsImageBox(props: { event: Event }) {
+export function EventsImageBox({ event }: { event: Event }) {
   return (
     <div className={styles.Event}>
       <Image
         objectFit="cover"
         className={styles.Image}
-        src={props.event.photoURL}
+        src={event.imageURLs[0]}
       />
       <Flex
         flexDirection="column"
@@ -19,9 +19,9 @@ export function EventsImageBox(props: { event: Event }) {
         width="100%"
       >
         <Heading noOfLines={3} as="h4">
-          {props.event.title}
+          {event.title}
         </Heading>
-        <Text>{props.event.date}</Text>
+        <Text>{new Date(event.timeCreated).toLocaleDateString()}</Text>
       </Flex>
       <Flex
         justifyContent="center"

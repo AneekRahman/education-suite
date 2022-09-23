@@ -16,26 +16,31 @@ import {
   Td,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
-import {
-  Event,
-  eventsList,
-  Notice,
-  noticesList,
-  SiteInfo,
-} from "../components/constansts";
+import { Event, Notice, noticesList, SiteInfo } from "../components/constansts";
 import { Link } from "react-router-dom";
 import { EventsImageBox } from "../components/EventsImageBox";
 import { useEffect, useState } from "react";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  limit,
+  orderBy,
+  query,
+} from "firebase/firestore";
 
 export default function HomePage() {
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
     movingHeader: { label: "", link: "" },
     bgImageURL: "",
   });
+  const [eventsList, setEventsList] = useState<Event[]>([]);
 
   // componentDidMount
   useEffect(() => {
+    // Get /siteInfo/
     getDoc(doc(getFirestore(), "siteInfo/default")).then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.data();
@@ -43,6 +48,28 @@ export default function HomePage() {
           movingHeader: data.movingHeader,
           bgImageURL: data.bgImageURL,
         });
+      }
+    });
+
+    // Get 5 events from /events/
+    getDocs(
+      query(
+        collection(getFirestore(), "events"),
+        orderBy("timeCreated", "desc"),
+        limit(5)
+      )
+    ).then((snapshots) => {
+      if (!snapshots.empty) {
+        const events: Event[] = snapshots.docs.map((snapshot) => {
+          const data = snapshot.data();
+          return {
+            id: snapshot.id,
+            timeCreated: data.timeCreated,
+            title: data.title,
+            imageURLs: data.imageURLs,
+          };
+        });
+        setEventsList(events);
       }
     });
   }, []);
@@ -62,7 +89,7 @@ export default function HomePage() {
             Knowledge
           </h2>
         </div>
-        <EventsBox />
+        <EventsBox eventsList={eventsList} />
       </div>
       <MessagesRow />
       <div className={styles.WigglyBg1Wrapper}>
@@ -71,8 +98,8 @@ export default function HomePage() {
       </div>
       <div className={styles.WigglyBg2Wrapper}>
         <img src="/assets/wiggly-bg2.svg" className={styles.WiggleBg2} alt="" />
-        <EventsImageGrid />
-        <MobileEventsList />
+        <EventsImageGrid eventsList={eventsList} />
+        <MobileEventsList eventsList={eventsList} />
       </div>
       <LocationAboutBox />
       <Footer />
@@ -136,7 +163,7 @@ function LocationAboutBox() {
   );
 }
 
-function MobileEventsList() {
+function MobileEventsList({ eventsList }: { eventsList: Event[] }) {
   return (
     <div className={styles.MobileEventsList}>
       <h3>EVENTS BOARD</h3>
@@ -153,7 +180,7 @@ function MobileEventsList() {
   );
 }
 
-function EventsImageGrid() {
+function EventsImageGrid({ eventsList }: { eventsList: Event[] }) {
   return (
     <div className={styles.EventsImageGrid}>
       <h3>EVENTS BOARD</h3>
@@ -251,22 +278,29 @@ function MessagesRow() {
   );
 }
 
-function EventsBox() {
+function EventsBox({ eventsList }: { eventsList: Event[] }) {
   return (
     <div className={styles.HeroEventsWrapper}>
-      <h3>03/10 EVENTS</h3>
+      <h3>{eventsList.length}/10 EVENTS</h3>
 
       <Flex>
-        {eventsList.map((event: Event) => (
-          <Flex className={styles.EventColumn}>
-            <Heading as="h4">
-              {event.date.split(" ")[0]}
-              <br />
-              {event.date.split(" ")[1]}
-            </Heading>
-            <Text noOfLines={5}>{event.title}</Text>
-          </Flex>
-        ))}
+        {eventsList.map((event: Event) => {
+          // If no title is added, don't list in the Hero Events section
+          if (event.title === "") return <></>;
+
+          const date = new Date(event.timeCreated);
+          const month = date.toLocaleString("default", { month: "short" });
+          return (
+            <Flex className={styles.EventColumn}>
+              <Heading as="h4">
+                {month}
+                <br />
+                {date.getDate()}
+              </Heading>
+              <Text noOfLines={5}>{event.title}</Text>
+            </Flex>
+          );
+        })}
       </Flex>
     </div>
   );

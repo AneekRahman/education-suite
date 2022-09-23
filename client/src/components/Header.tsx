@@ -33,7 +33,9 @@ export default function Header({ siteInfo }: { siteInfo: SiteInfo }) {
     <div className={styles.Header}>
       <Flex justifyContent="flex-start" className={styles.UpperRowWrapper}>
         <div className={styles.MobileMovingHeadlineWrapper}>
-          <p>{siteInfo.movingHeader?.label}</p>
+          <ChakraLink href={siteInfo.movingHeader?.link} isExternal>
+            <p>{siteInfo.movingHeader?.label}</p>
+          </ChakraLink>
         </div>
         <Flex width="100%">
           <Image className={styles.Logo} src="/assets/header-logo.png" alt="" />

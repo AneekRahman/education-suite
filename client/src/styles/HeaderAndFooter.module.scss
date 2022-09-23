@@ -29,11 +29,11 @@
         color: white;
         padding: 0.5em 1em;
         animation: movingHeadline 30s linear infinite;
-        // cursor: pointer;
+        cursor: pointer;
         white-space: nowrap;
 
         &:hover {
-          // color: rgb(0, 132, 197);
+          color: rgb(0, 132, 197);
           animation-play-state: paused;
         }
       }

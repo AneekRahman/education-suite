@@ -7,14 +7,14 @@ interface SiteInfo {
 }
 
 interface Event {
-  date: string; // Jan 8
+  id: string;
+  timeCreated: number; // 1663945988679
   title: string;
-  link: string;
-  photoURL: string;
+  imageURLs: string[];
 }
 
 interface Notice {
-  date: string; // March 26, 2018
+  date: string; // 1663945988679
   title: string;
   link: string;
 }
@@ -152,47 +152,5 @@ export const noticesList: Notice[] = [
     title:
       "পাবনার আটঘরিয়া উপজেলার ঐতিহ্যবাহী কয়রাবাড়ী বহুমুখী উচ্চ বিদ্যালয়ে বুধবার (৩ আগষ্ট -২০২২ খ্রি.) পাঠদান কার্যক্রম পরিদর্শন করেন উপজেলা নির্বাহী কর্মকর্তা মাকসুদা আক্তার মাসু। ",
     link: "",
-  },
-];
-
-// 5 events will be fetched from Firestore
-export const eventsList: Event[] = [
-  {
-    date: "JAN 8",
-    title:
-      " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
-    link: "",
-    photoURL: "https://i.ytimg.com/vi/9LsQbUav6mc/maxresdefault.jpg",
-  },
-  {
-    date: "MAR 30",
-    title:
-      " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
-    link: "",
-    photoURL:
-      "https://images.hindustantimes.com/img/2021/09/12/1600x900/BANGLADESH-HEALTH-VIRUS-EDUCATION-2_1631428046899_1631428652121.jpg",
-  },
-  {
-    date: "AUG 12",
-    title:
-      " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
-    link: "",
-    photoURL:
-      "https://www.wsws.org/asset/096bbd60-25da-4841-a324-7aaad9e57093?rendition=image1280",
-  },
-  {
-    date: "MAR 30",
-    title:
-      " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
-    link: "",
-    photoURL:
-      "https://www.gage.odi.org/wp-content/uploads/2019/12/Students-at-school-in-Chittagong-Bangladesh-c-NBertrams_NB_1418.jpg",
-  },
-  {
-    date: "AUG 12",
-    title:
-      " A Delegate of Liaoning Communication University Visited Canadian University of Bangladesh. It was a glorious day.",
-    link: "",
-    photoURL: "https://ddnews.gov.in/sites/default/files/Bangladesh_86.jpg",
   },
 ];
