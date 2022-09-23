@@ -16,7 +16,7 @@ import {
   Td,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
-import { Event, Notice, noticesList, SiteInfo } from "../components/constansts";
+import { Event, Notice, SiteInfo } from "../components/constansts";
 import { Link } from "react-router-dom";
 import { EventsImageBox } from "../components/EventsImageBox";
 import { useEffect, useState } from "react";
@@ -37,6 +37,7 @@ export default function HomePage() {
     bgImageURL: "",
   });
   const [eventsList, setEventsList] = useState<Event[]>([]);
+  const [noticesList, setNoticesList] = useState<Notice[]>([]);
 
   // componentDidMount
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function HomePage() {
       }
     });
 
-    // Get 5 events from /events/
+    // Get newest 5 events from /events/
     getDocs(
       query(
         collection(getFirestore(), "events"),
@@ -70,6 +71,27 @@ export default function HomePage() {
           };
         });
         setEventsList(events);
+      }
+    });
+    // Get newest 10 events from /notices/
+    getDocs(
+      query(
+        collection(getFirestore(), "notices"),
+        orderBy("timeCreated", "desc"),
+        limit(5)
+      )
+    ).then((snapshots) => {
+      if (!snapshots.empty) {
+        const notices: Notice[] = snapshots.docs.map((snapshot) => {
+          const data = snapshot.data();
+          return {
+            id: snapshot.id,
+            timeCreated: data.timeCreated,
+            title: data.title,
+            fileURLs: data.fileURLs,
+          };
+        });
+        setNoticesList(notices);
       }
     });
   }, []);
@@ -94,7 +116,7 @@ export default function HomePage() {
       <MessagesRow />
       <div className={styles.WigglyBg1Wrapper}>
         <img src="/assets/wiggly-bg1.svg" className={styles.WiggleBg1} alt="" />
-        <NoticeBox />
+        <NoticeBox noticesList={noticesList} />
       </div>
       <div className={styles.WigglyBg2Wrapper}>
         <img src="/assets/wiggly-bg2.svg" className={styles.WiggleBg2} alt="" />
@@ -226,28 +248,28 @@ function EventsImageGrid({ eventsList }: { eventsList: Event[] }) {
   );
 }
 
-function NoticeBox() {
+function NoticeBox({ noticesList }: { noticesList: Notice[] }) {
   return (
     <Flex justifyContent="center" className={styles.NoticeBoxWrapper}>
       <div className={styles.NoticeFakeBox}></div>
       <div className={styles.NoticeBoxInnerWrapper}>
-        <h3>NOTICE BOARD</h3>
+        <h3>NOTICE BOARD ({noticesList.length})</h3>
 
-        <div className={styles.NoticesWrapper}>
+        <Flex flexDir="column" className={styles.NoticesWrapper}>
           {noticesList.map((notice: Notice) => (
             <div className={styles.Notice}>
               <Heading as="h4">{notice.title}</Heading>
-              <p>{notice.date}</p>
+              <p>{new Date(notice.timeCreated).toLocaleDateString()}</p>
             </div>
           ))}
-          <Center>
+          <Center flex={1}>
             <Link to="/notice">
               <Button zIndex={1000} colorScheme="red">
                 SHOW ALL NOTICES
               </Button>
             </Link>
           </Center>
-        </div>
+        </Flex>
       </div>
     </Flex>
   );
@@ -260,17 +282,23 @@ function MessagesRow() {
         <h3>MESSAGES</h3>
 
         <Flex className={styles.MessageColumn} alignItems="center">
-          <img src="/assets/mc2.png" alt="" />
+          <img
+            src="https://media.istockphoto.com/vectors/default-avatar-photo-placeholder-icon-grey-profile-picture-business-vector-id1327592506?k=20&m=1327592506&s=612x612&w=0&h=hgMOPfz7H-CYP_CQ0wbv3IwRkbQna32xWUPoXtMyg5M="
+            alt=""
+          />
           <div>
-            <h4>MD. ZILLUR RAHMAN</h4>
-            <p>ASSISTANT PRINCIPAL</p>
+            <h4>MR. JOHN DOE</h4>
+            <p>PRINCIPAL</p>
           </div>
         </Flex>
         <Flex className={styles.MessageColumn} alignItems="center">
-          <img src="/assets/mc1.png" alt="" />
+          <img
+            src="https://media.istockphoto.com/vectors/default-avatar-photo-placeholder-icon-grey-profile-picture-business-vector-id1327592506?k=20&m=1327592506&s=612x612&w=0&h=hgMOPfz7H-CYP_CQ0wbv3IwRkbQna32xWUPoXtMyg5M="
+            alt=""
+          />
           <div>
-            <h4>MD. TOFAZZOL HOSSAIN</h4>
-            <p>ASSISTANT TEACHER</p>
+            <h4>MR. JOHN DOE</h4>
+            <p>CHAIRMAN</p>
           </div>
         </Flex>
       </Flex>

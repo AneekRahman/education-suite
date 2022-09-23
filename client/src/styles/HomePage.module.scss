@@ -172,6 +172,7 @@
 
     .NoticeBoxInnerWrapper {
       max-width: 70vw;
+      min-height: 90vh;
       padding: 3em;
       background-color: white;
       box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.1);
@@ -184,6 +185,7 @@
 
       .NoticesWrapper {
         margin-top: 1em;
+        height: 100%;
 
         .Notice {
           margin-bottom: 1em;
