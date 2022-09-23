@@ -30,9 +30,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 export default function HomePage() {
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
-    eiin: 0,
-    established: 0,
-    sitename: "",
+    movingHeader: { label: "", link: "" },
   });
 
   // componentDidMount
@@ -41,10 +39,7 @@ export default function HomePage() {
       if (snapshot.exists()) {
         const data = snapshot.data();
         setsiteInfo({
-          eiin: data.eiin,
-          established: data.established,
           movingHeader: data.movingHeader,
-          sitename: data.sitename,
         });
       }
     });

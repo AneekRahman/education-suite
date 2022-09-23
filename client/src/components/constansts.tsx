@@ -1,11 +1,8 @@
 interface SiteInfo {
-  eiin: number;
-  established: number;
-  movingHeader?: {
+  movingHeader: {
     label: string;
     link: string;
   };
-  sitename: string;
 }
 
 interface Event {
