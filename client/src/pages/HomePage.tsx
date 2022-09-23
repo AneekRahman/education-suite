@@ -16,20 +16,15 @@ import {
   Td,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
-import { Event, Notice, SiteInfo } from "../components/constansts";
+import {
+  Event,
+  FirestoreRequests,
+  Notice,
+  SiteInfo,
+} from "../components/constansts";
 import { Link } from "react-router-dom";
 import { EventsImageBox } from "../components/EventsImageBox";
 import { useEffect, useState } from "react";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  limit,
-  orderBy,
-  query,
-} from "firebase/firestore";
 
 export default function HomePage() {
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
@@ -42,58 +37,17 @@ export default function HomePage() {
   // componentDidMount
   useEffect(() => {
     // Get /siteInfo/
-    getDoc(doc(getFirestore(), "siteInfo/default")).then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.data();
-        setsiteInfo({
-          movingHeader: data.movingHeader,
-          bgImageURL: data.bgImageURL,
-        });
-      }
-    });
+    FirestoreRequests.getSiteInfo().then((siteInfo) => setsiteInfo(siteInfo));
 
     // Get newest 5 events from /events/
-    getDocs(
-      query(
-        collection(getFirestore(), "events"),
-        orderBy("timeCreated", "desc"),
-        limit(5)
-      )
-    ).then((snapshots) => {
-      if (!snapshots.empty) {
-        const events: Event[] = snapshots.docs.map((snapshot) => {
-          const data = snapshot.data();
-          return {
-            id: snapshot.id,
-            timeCreated: data.timeCreated,
-            title: data.title,
-            imageURLs: data.imageURLs,
-          };
-        });
-        setEventsList(events);
-      }
-    });
-    // Get newest 10 events from /notices/
-    getDocs(
-      query(
-        collection(getFirestore(), "notices"),
-        orderBy("timeCreated", "desc"),
-        limit(5)
-      )
-    ).then((snapshots) => {
-      if (!snapshots.empty) {
-        const notices: Notice[] = snapshots.docs.map((snapshot) => {
-          const data = snapshot.data();
-          return {
-            id: snapshot.id,
-            timeCreated: data.timeCreated,
-            title: data.title,
-            fileURLs: data.fileURLs,
-          };
-        });
-        setNoticesList(notices);
-      }
-    });
+    FirestoreRequests.getEvents(5, undefined).then((events) =>
+      setEventsList(events)
+    );
+
+    // Get newest 7 notices from /notices/
+    FirestoreRequests.getNotices(7, undefined).then((notices) =>
+      setNoticesList(notices)
+    );
   }, []);
 
   return (
@@ -186,6 +140,8 @@ function LocationAboutBox() {
 }
 
 function MobileEventsList({ eventsList }: { eventsList: Event[] }) {
+  if (eventsList.length === 0) return <></>;
+
   return (
     <div className={styles.MobileEventsList}>
       <h3>EVENTS BOARD</h3>
@@ -203,6 +159,8 @@ function MobileEventsList({ eventsList }: { eventsList: Event[] }) {
 }
 
 function EventsImageGrid({ eventsList }: { eventsList: Event[] }) {
+  if (eventsList.length === 0) return <></>;
+
   return (
     <div className={styles.EventsImageGrid}>
       <h3>EVENTS BOARD</h3>
@@ -249,6 +207,8 @@ function EventsImageGrid({ eventsList }: { eventsList: Event[] }) {
 }
 
 function NoticeBox({ noticesList }: { noticesList: Notice[] }) {
+  if (noticesList.length === 0) return <></>;
+
   return (
     <Flex justifyContent="center" className={styles.NoticeBoxWrapper}>
       <div className={styles.NoticeFakeBox}></div>

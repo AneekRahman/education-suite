@@ -1,7 +1,6 @@
 import { Center, Flex } from "@chakra-ui/react";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { SiteInfo } from "../../components/constansts";
+import { FirestoreRequests, SiteInfo } from "../../components/constansts";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import styles from "../../styles/GenericPage.module.scss";
@@ -20,15 +19,8 @@ export default function GenericPage({
 
   // componentDidMount
   useEffect(() => {
-    getDoc(doc(getFirestore(), "siteInfo/default")).then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.data();
-        setsiteInfo({
-          movingHeader: data.movingHeader,
-          bgImageURL: data.bgImageURL,
-        });
-      }
-    });
+    // Get /siteInfo/
+    FirestoreRequests.getSiteInfo().then((siteInfo) => setsiteInfo(siteInfo));
   }, []);
 
   return (

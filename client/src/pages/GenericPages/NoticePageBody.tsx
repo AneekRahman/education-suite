@@ -1,40 +1,18 @@
 import { Box, Button, Center, Heading } from "@chakra-ui/react";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  limit,
-  orderBy,
-  query,
-} from "firebase/firestore";
-import { useState } from "react";
-import { Notice } from "../../components/constansts";
+import { useEffect, useState } from "react";
+import { FirestoreRequests, Notice } from "../../components/constansts";
 import styles from "../../styles/GenericPages/NoticePageBody.module.scss";
 
 export default function NoticePageBody() {
   const [noticesList, setNoticesList] = useState<Notice[]>([]);
 
-  // Get newest 10 events from /notices/
-  getDocs(
-    query(
-      collection(getFirestore(), "notices"),
-      orderBy("timeCreated", "desc"),
-      limit(5)
-    )
-  ).then((snapshots) => {
-    if (!snapshots.empty) {
-      const notices: Notice[] = snapshots.docs.map((snapshot) => {
-        const data = snapshot.data();
-        return {
-          id: snapshot.id,
-          timeCreated: data.timeCreated,
-          title: data.title,
-          fileURLs: data.fileURLs,
-        };
-      });
-      setNoticesList(notices);
-    }
-  });
+  // componentDidMount
+  useEffect(() => {
+    // Get newest 7 notices from /notices/
+    FirestoreRequests.getNotices(7, undefined).then((notices) =>
+      setNoticesList(notices)
+    );
+  }, []);
 
   return (
     <div className={styles.NoticePageBody}>

@@ -1,3 +1,15 @@
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  limit,
+  orderBy,
+  query,
+  startAfter,
+} from "firebase/firestore";
+
 interface SiteInfo {
   bgImageURL: string;
   movingHeader: {
@@ -110,30 +122,100 @@ export const tabsList: MyTab[] = [
   },
 ];
 
-// 10 Notices will be fetched from Firestore
-const noticesList: Notice[] = [
-  // {
-  //   date: "March 26, 2018",
-  //   title:
-  //     "কয়রাবাড়ী বহুমুখী উচ্চ বিদ্যালয়ের ম্যানেজিং কমিটি, সকল  শিক্ষক, অভিভাবক, শিক্ষার্থীদের ঈদুল আযহার শুভেচ্ছা। ঈদ মোবারক",
-  //   link: "",
-  // },
-  // {
-  //   date: "March 26, 2018",
-  //   title:
-  //     "মাননীয় এমপি মহোদয় বীর মুক্তিযোদ্ধা  জনাব আলহাজ্ব মোঃ নুরুজ্জামান বিশ্বাস, সংসদ সদস্য পাবনা-৪ (আটঘরিয়া-ঈশ্বরদী)।",
-  //   link: "",
-  // },
-  // {
-  //   date: "March 26, 2018",
-  //   title:
-  //     "সেই মাঠমার্চ যেটি মহান স্বাধীনতা ও জাতীয় দিবস-2018 খ্রিঃ আটঘরিয়া উপজেলা স্টেডিয়াম মাঠে   কয়রাবাড়ীবহুমুখী উচ্চ বিদ্যালয় প্রথম স্থান অধিকার করে।",
-  //   link: "",
-  // },
-  // {
-  //   date: "March 26, 2018",
-  //   title:
-  //     "পাবনার আটঘরিয়া উপজেলার ঐতিহ্যবাহী কয়রাবাড়ী বহুমুখী উচ্চ বিদ্যালয়ে বুধবার (৩ আগষ্ট -২০২২ খ্রি.) পাঠদান কার্যক্রম পরিদর্শন করেন উপজেলা নির্বাহী কর্মকর্তা মাকসুদা আক্তার মাসু। ",
-  //   link: "",
-  // },
-];
+export class FirestoreRequests {
+  static getSiteInfo = async (): Promise<SiteInfo> => {
+    const snapshot = await getDoc(doc(getFirestore(), "siteInfo/default"));
+    if (snapshot.exists()) {
+      const data = snapshot.data();
+      return {
+        movingHeader: data.movingHeader,
+        bgImageURL: data.bgImageURL,
+      };
+    }
+    return {
+      movingHeader: {
+        label: "",
+        link: "",
+      },
+      bgImageURL: "",
+    };
+  };
+  // Get newest events from /events/
+  static getEvents = async (
+    docsLimit: number,
+    lastTimeCreated?: number
+  ): Promise<Event[]> => {
+    // Query Without startAfter
+    let q = query(
+      collection(getFirestore(), "events"),
+      orderBy("timeCreated", "desc"),
+      limit(docsLimit)
+    );
+    // Query If we need to use startAfter
+    if (lastTimeCreated) {
+      q = query(
+        collection(getFirestore(), "events"),
+        orderBy("timeCreated", "desc"),
+        startAfter(lastTimeCreated),
+        limit(docsLimit)
+      );
+    }
+
+    // Do the query
+    const snapshots = await getDocs(q);
+
+    if (!snapshots.empty) {
+      const events: Event[] = snapshots.docs.map((snapshot) => {
+        const data = snapshot.data();
+        return {
+          id: snapshot.id,
+          timeCreated: data.timeCreated,
+          title: data.title,
+          imageURLs: data.imageURLs,
+        };
+      });
+      return events;
+    }
+    // If none found return empty
+    return [];
+  };
+  // Get newest notices from /notices/
+  static getNotices = async (
+    docsLimit: number,
+    lastTimeCreated?: number
+  ): Promise<Notice[]> => {
+    // Query Without startAfter
+    let q = query(
+      collection(getFirestore(), "notices"),
+      orderBy("timeCreated", "desc"),
+      limit(docsLimit)
+    );
+    // Query If we need to use startAfter
+    if (lastTimeCreated) {
+      q = query(
+        collection(getFirestore(), "notices"),
+        orderBy("timeCreated", "desc"),
+        startAfter(lastTimeCreated),
+        limit(docsLimit)
+      );
+    }
+
+    // Do the query
+    const snapshots = await getDocs(q);
+
+    if (!snapshots.empty) {
+      const notices: Notice[] = snapshots.docs.map((snapshot) => {
+        const data = snapshot.data();
+        return {
+          id: snapshot.id,
+          timeCreated: data.timeCreated,
+          title: data.title,
+          fileURLs: data.fileURLs,
+        };
+      });
+      return notices;
+    }
+    // If none found return empty
+    return [];
+  };
+}
