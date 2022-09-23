@@ -140,6 +140,7 @@ export class FirestoreRequests {
       bgImageURL: "",
     };
   };
+
   // Get newest events from /events/
   static getEvents = async (
     docsLimit: number,
@@ -179,6 +180,16 @@ export class FirestoreRequests {
     // If none found return empty
     return [];
   };
+
+  static getSingleEvent = async (
+    eventUid: string
+  ): Promise<Event | undefined> => {
+    const snapshot = await getDoc(doc(getFirestore(), `events/${eventUid}`));
+    if (snapshot.exists()) {
+      return snapshot.data() as Event;
+    }
+  };
+
   // Get newest notices from /notices/
   static getNotices = async (
     docsLimit: number,
