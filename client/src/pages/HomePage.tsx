@@ -215,10 +215,12 @@ function NoticeBox({ noticesList }: { noticesList: Notice[] }) {
 
         <Flex flexDir="column" className={styles.NoticesWrapper}>
           {noticesList.map((notice: Notice) => (
-            <div className={styles.Notice}>
-              <Heading as="h4">{notice.title}</Heading>
-              <p>{new Date(notice.timeCreated).toLocaleDateString()}</p>
-            </div>
+            <Link to={`/notice/${notice.id}`}>
+              <div className={styles.Notice}>
+                <Heading as="h4">{notice.title}</Heading>
+                <p>{new Date(notice.timeCreated).toLocaleDateString()}</p>
+              </div>
+            </Link>
           ))}
           <Center flex={1}>
             <Link to="/notices">

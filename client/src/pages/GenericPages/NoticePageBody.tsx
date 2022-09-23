@@ -1,5 +1,6 @@
 import { Box, Button, Center, Heading, SkeletonText } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FirestoreRequests, Notice } from "../../components/constansts";
 import styles from "../../styles/GenericPages/NoticePageBody.module.scss";
 
@@ -28,10 +29,12 @@ export default function NoticePageBody() {
 
             <div className={styles.NoticesWrapper}>
               {noticesList.map((notice: Notice) => (
-                <div className={styles.Notice}>
-                  <Heading as="h4">{notice.title}</Heading>
-                  <p>{new Date(notice.timeCreated).toLocaleDateString()}</p>
-                </div>
+                <Link to={`/notice/${notice.id}`}>
+                  <div className={styles.Notice}>
+                    <Heading as="h4">{notice.title}</Heading>
+                    <p>{new Date(notice.timeCreated).toLocaleDateString()}</p>
+                  </div>
+                </Link>
               ))}
               <Center>
                 <Button

@@ -78,7 +78,7 @@ export const tabsList: MyTab[] = [
       { label: "PDS", link: "http://pds.sib.gov.bd/" },
     ],
   },
-  { label: "NOTICE", link: "/notices" },
+  { label: "NOTICES", link: "/notices" },
   { label: "EVENTS", link: "/events" },
   { label: "CONTACT", link: "/contact" },
   { label: "FACULTY", link: "/faculty" },
