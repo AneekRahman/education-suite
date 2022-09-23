@@ -1,4 +1,12 @@
-import { Button, Center, Grid, GridItem, Spacer } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Grid,
+  GridItem,
+  SkeletonText,
+  Spacer,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Event, FirestoreRequests } from "../../components/constansts";
 import { EventsImageBox } from "../../components/EventsImageBox";
@@ -7,18 +15,22 @@ import styles from "../../styles/GenericPages/EventsPageBody.module.scss";
 export default function EventsPageBody() {
   const [eventsList, setEventsList] = useState<Event[]>([]);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [firestoreStillLoading, setFirestoreStillLoading] = useState(true);
 
   // componentDidMount
   useEffect(() => {
     // Get newest 12 events from /events/
-    FirestoreRequests.getEvents(12, undefined).then((events) =>
-      setEventsList(events)
-    );
+    FirestoreRequests.getEvents(12, undefined).then((events) => {
+      setEventsList(events);
+      // Firestore request was loaded
+      setFirestoreStillLoading(false);
+    });
   }, []);
 
   return (
     <div className={styles.EventsPageBody}>
-      <h3>EVENTS HERE</h3>
+      <h3>EVENTS ({eventsList.length}):</h3>
+      {firestoreStillLoading ? <EventsLoadingSkeleton /> : null}
       <Grid
         className={styles.EventWrapper}
         templateColumns="repeat(3, 1fr)"
@@ -51,5 +63,23 @@ export default function EventsPageBody() {
         </Button>
       </Center>
     </div>
+  );
+}
+
+function EventsLoadingSkeleton() {
+  return (
+    <Grid
+      className={styles.EventWrapper}
+      templateColumns="repeat(3, 1fr)"
+      gap={6}
+    >
+      {Array(6)
+        .fill(0)
+        .map((v) => (
+          <Box padding="10em 2em 2em" boxShadow="lg" bg="white">
+            <SkeletonText mt="4" noOfLines={4} spacing="4" />
+          </Box>
+        ))}
+    </Grid>
   );
 }

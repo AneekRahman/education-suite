@@ -33,11 +33,15 @@ function App() {
             />
             <Route
               path="/notice"
-              element={<GenericPage title="NOTICE" body={<NoticePageBody />} />}
+              element={
+                <GenericPage title="NOTICE BOARD" body={<NoticePageBody />} />
+              }
             />
             <Route
               path="/events"
-              element={<GenericPage title="EVENTS" body={<EventsPageBody />} />}
+              element={
+                <GenericPage title="EVENTS HALL" body={<EventsPageBody />} />
+              }
             />
             <Route
               path="/messages/principal"
