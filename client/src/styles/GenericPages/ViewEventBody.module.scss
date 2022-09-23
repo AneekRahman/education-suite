@@ -54,6 +54,11 @@
   .ViewEventBody {
     padding: 1em;
 
+    > h3 {
+      font-weight: 900;
+      font-size: 1.4em;
+    }
+
     .CarouselItem {
       img {
         width: 100%;

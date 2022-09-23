@@ -18,6 +18,7 @@ import NoticePageBody from "./pages/GenericPages/NoticePageBody";
 import EventsPageBody from "./pages/GenericPages/EventsPageBody";
 import FacultyPageBody from "./pages/GenericPages/FacultyPageBody";
 import ViewEventBody from "./pages/GenericPages/ViewEventBody";
+import ViewNoticeBody from "./pages/GenericPages/ViewNoticeBody";
 
 function App() {
   return (
@@ -39,6 +40,12 @@ function App() {
               }
             />
             <Route
+              path="/notice/:noticeUid"
+              element={
+                <GenericPage title="VIEW NOTICE" body={<ViewNoticeBody />} />
+              }
+            />
+            <Route
               path="/events"
               element={
                 <GenericPage title="EVENTS HALL" body={<EventsPageBody />} />
@@ -47,7 +54,7 @@ function App() {
             <Route
               path="/event/:eventUid"
               element={
-                <GenericPage title="EVENT INFO" body={<ViewEventBody />} />
+                <GenericPage title="VIEW EVENT" body={<ViewEventBody />} />
               }
             />
             <Route

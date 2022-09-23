@@ -3,14 +3,40 @@
 .ViewNoticeBody {
   padding: 3em;
 
-  h3 {
+  > h3 {
     font-weight: 900;
     font-size: 2em;
+  }
+  > p {
+    font-size: 1.3em;
+  }
+
+  .FilesRowWrapper {
+    margin-top: 1em;
+    flex-wrap: wrap;
+
+    .FileRow {
+      background-color: white;
+      margin-right: 1em;
+      margin-top: 1em;
+      border-radius: 1em;
+      padding: 1em 1.4em;
+    }
+  }
+
+  .PDFViewer {
+    margin-top: 2em;
+    min-height: 90vh;
   }
 }
 
 @media screen and (max-width: $mobileMediaThreshold) {
   .ViewNoticeBody {
     padding: 1em;
+
+    > h3 {
+      font-weight: 900;
+      font-size: 1.4em;
+    }
   }
 }

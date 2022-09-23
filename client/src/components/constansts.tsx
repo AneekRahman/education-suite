@@ -191,9 +191,9 @@ export class FirestoreRequests {
   };
 
   static getSingleNotice = async (
-    eventUid: string
+    noticeUid: string
   ): Promise<Notice | undefined> => {
-    const snapshot = await getDoc(doc(getFirestore(), `notices/${eventUid}`));
+    const snapshot = await getDoc(doc(getFirestore(), `notices/${noticeUid}`));
     if (snapshot.exists()) {
       return snapshot.data() as Notice;
     }
