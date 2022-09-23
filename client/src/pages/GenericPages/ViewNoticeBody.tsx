@@ -70,13 +70,17 @@ export default function ViewNoticeBody() {
             <Spacer w={1} />
             <Text>Attachment {i + 1}</Text>
             <Spacer w={3} />
-            <Button
-              onClick={(e) => {
-                setLoadedFileURL(url);
-              }}
-            >
-              Load In Viewer
-            </Button>
+
+            {thisNotice.fileURLs.length > 1 ? (
+              <Button
+                onClick={(e) => {
+                  setLoadedFileURL(url);
+                }}
+              >
+                Load In Viewer
+              </Button>
+            ) : null}
+
             <Spacer w={3} />
             <form method="get" action={url}>
               <Button type="submit">Download</Button>

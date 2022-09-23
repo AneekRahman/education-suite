@@ -281,14 +281,16 @@ function EventsBox({ eventsList }: { eventsList: Event[] }) {
           const date = new Date(event.timeCreated);
           const month = date.toLocaleString("default", { month: "short" });
           return (
-            <Flex className={styles.EventColumn}>
-              <Heading as="h4">
-                {month}
-                <br />
-                {date.getDate()}
-              </Heading>
-              <Text noOfLines={5}>{event.title}</Text>
-            </Flex>
+            <Link to={`/event/${event.id}`}>
+              <Flex className={styles.EventColumn}>
+                <Heading as="h4">
+                  {month}
+                  <br />
+                  {date.getDate()}
+                </Heading>
+                <Text noOfLines={5}>{event.title}</Text>
+              </Flex>
+            </Link>
           );
         })}
       </Flex>
