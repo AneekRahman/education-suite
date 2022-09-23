@@ -5,11 +5,12 @@ import styles from "../../styles/GenericPages/NoticePageBody.module.scss";
 
 export default function NoticePageBody() {
   const [noticesList, setNoticesList] = useState<Notice[]>([]);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   // componentDidMount
   useEffect(() => {
-    // Get newest 7 notices from /notices/
-    FirestoreRequests.getNotices(7, undefined).then((notices) =>
+    // Get newest 12 notices from /notices/
+    FirestoreRequests.getNotices(12, undefined).then((notices) =>
       setNoticesList(notices)
     );
   }, []);
@@ -18,17 +19,39 @@ export default function NoticePageBody() {
     <div className={styles.NoticePageBody}>
       <Center>
         <Box bg="#fff" className={styles.TableWrapper}>
-          <NoticeBoard noticesList={noticesList} />
+          <NoticeBoard
+            noticesList={noticesList}
+            loadingMore={loadingMore}
+            onMoreClicked={async (e) => {
+              setLoadingMore(true);
+              const lastTimeCreated = noticesList.at(-1)?.timeCreated;
+
+              const notices = await FirestoreRequests.getNotices(
+                12,
+                lastTimeCreated
+              );
+              setNoticesList([...noticesList, ...notices]);
+              setLoadingMore(false);
+            }}
+          />
         </Box>
       </Center>
     </div>
   );
 }
 
-function NoticeBoard({ noticesList }: { noticesList: Notice[] }) {
+function NoticeBoard({
+  noticesList,
+  loadingMore,
+  onMoreClicked,
+}: {
+  noticesList: Notice[];
+  loadingMore: boolean;
+  onMoreClicked: React.MouseEventHandler<HTMLButtonElement>;
+}) {
   return (
     <div className={styles.NoticeBoardWrapper}>
-      <h3>Notice Board</h3>
+      <h3>Notice Board ({noticesList.length})</h3>
 
       <div className={styles.NoticesWrapper}>
         {noticesList.map((notice: Notice) => (
@@ -38,7 +61,13 @@ function NoticeBoard({ noticesList }: { noticesList: Notice[] }) {
           </div>
         ))}
         <Center>
-          <Button colorScheme="red">LOAD MORE NOTICES</Button>
+          <Button
+            isLoading={loadingMore}
+            colorScheme="red"
+            onClick={onMoreClicked}
+          >
+            LOAD MORE NOTICES
+          </Button>
         </Center>
       </div>
     </div>

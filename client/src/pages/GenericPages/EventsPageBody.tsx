@@ -6,11 +6,12 @@ import styles from "../../styles/GenericPages/EventsPageBody.module.scss";
 
 export default function EventsPageBody() {
   const [eventsList, setEventsList] = useState<Event[]>([]);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   // componentDidMount
   useEffect(() => {
-    // Get newest 5 events from /events/
-    FirestoreRequests.getEvents(5, undefined).then((events) =>
+    // Get newest 12 events from /events/
+    FirestoreRequests.getEvents(12, undefined).then((events) =>
       setEventsList(events)
     );
   }, []);
@@ -32,7 +33,22 @@ export default function EventsPageBody() {
 
       <Spacer h="6" />
       <Center>
-        <Button colorScheme="red">LOAD MORE EVENTS</Button>
+        <Button
+          isLoading={loadingMore}
+          colorScheme="red"
+          onClick={async (e) => {
+            setLoadingMore(true);
+            const lastTimeCreated = eventsList.at(-1)?.timeCreated;
+            const events = await FirestoreRequests.getEvents(
+              12,
+              lastTimeCreated
+            );
+            setEventsList([...eventsList, ...events]);
+            setLoadingMore(false);
+          }}
+        >
+          LOAD MORE EVENTS
+        </Button>
       </Center>
     </div>
   );
