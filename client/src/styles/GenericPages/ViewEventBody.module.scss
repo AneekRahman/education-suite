@@ -45,6 +45,7 @@
     img {
       width: auto;
       height: 100%;
+      object-fit: cover;
     }
   }
 }
@@ -52,5 +53,12 @@
 @media screen and (max-width: $mobileMediaThreshold) {
   .ViewEventBody {
     padding: 1em;
+
+    .CarouselItem {
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 }
