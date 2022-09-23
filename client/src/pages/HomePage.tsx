@@ -31,6 +31,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 export default function HomePage() {
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
     movingHeader: { label: "", link: "" },
+    bgImageURL: "",
   });
 
   // componentDidMount
@@ -40,6 +41,7 @@ export default function HomePage() {
         const data = snapshot.data();
         setsiteInfo({
           movingHeader: data.movingHeader,
+          bgImageURL: data.bgImageURL,
         });
       }
     });
@@ -47,7 +49,10 @@ export default function HomePage() {
 
   return (
     <div className={styles.HomePage}>
-      <div className={styles.HeroWrapper}>
+      <div
+        className={styles.HeroWrapper}
+        style={{ backgroundImage: `url(${siteInfo.bgImageURL})` }}
+      >
         <div className={styles.BgDarkGradient}></div>
         <Header siteInfo={siteInfo} />
         <div className={styles.HeroMainTextWrapper}>

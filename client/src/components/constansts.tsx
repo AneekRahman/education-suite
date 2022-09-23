@@ -1,4 +1,5 @@
 interface SiteInfo {
+  bgImageURL: string;
   movingHeader: {
     label: string;
     link: string;

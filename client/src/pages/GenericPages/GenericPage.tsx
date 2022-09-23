@@ -14,9 +14,8 @@ export default function GenericPage({
   body: JSX.Element;
 }) {
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
-    eiin: 0,
-    established: 0,
-    sitename: "",
+    movingHeader: { label: "", link: "" },
+    bgImageURL: "",
   });
 
   // componentDidMount
@@ -25,10 +24,8 @@ export default function GenericPage({
       if (snapshot.exists()) {
         const data = snapshot.data();
         setsiteInfo({
-          eiin: data.eiin,
-          established: data.established,
           movingHeader: data.movingHeader,
-          sitename: data.sitename,
+          bgImageURL: data.bgImageURL,
         });
       }
     });
@@ -36,7 +33,11 @@ export default function GenericPage({
 
   return (
     <div className={styles.GenericPage}>
-      <Flex flexDirection="column" className={styles.HeroWrapper}>
+      <Flex
+        flexDirection="column"
+        className={styles.HeroWrapper}
+        style={{ backgroundImage: `url(${siteInfo.bgImageURL})` }}
+      >
         <div className={styles.BgDarkGradient}></div>
         <Header siteInfo={siteInfo} />
         <Center flex="1" className={styles.HeroMainTextWrapper}>

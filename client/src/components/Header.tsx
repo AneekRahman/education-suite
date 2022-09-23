@@ -21,6 +21,7 @@ import {
   AccordionItem,
   AccordionPanel,
   AccordionIcon,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
 import { FiBook, FiMenu } from "react-icons/fi";
@@ -48,7 +49,9 @@ function UpperColumNextToLogo({ siteInfo }: { siteInfo: SiteInfo }) {
   return (
     <div className={styles.UpperColumn}>
       <div className={styles.PcMovingHeadlineWrapper}>
-        <p>{siteInfo.movingHeader?.label}</p>
+        <ChakraLink href={siteInfo.movingHeader?.link} isExternal>
+          <p>{siteInfo.movingHeader?.label}</p>
+        </ChakraLink>
       </div>
       <Flex
         className={styles.TitleWrapper}
