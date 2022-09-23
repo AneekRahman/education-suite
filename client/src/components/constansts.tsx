@@ -1,3 +1,13 @@
+interface SiteInfo {
+  eiin: number;
+  established: number;
+  movingHeader?: {
+    label: string;
+    link: string;
+  };
+  sitename: string;
+}
+
 interface Event {
   date: string; // Jan 8
   title: string;
@@ -18,7 +28,7 @@ interface MyTab {
 }
 
 // Export the types
-export type { Event, Notice, MyTab };
+export type { Event, Notice, MyTab, SiteInfo };
 
 // EXPORT THE CONSTANT VALUES --------------------
 
@@ -100,10 +110,6 @@ export const tabsList: MyTab[] = [
     ],
   },
 ];
-
-export const movingHealine: string = `অবিভক্ত ব্রিটিশ বাংলার উনিশ শতকের দ্বিতীয়ার্ধের শুরুতে আধুনিক
-              শিক্ষা বিষয়ক ঐতিহাসিক নীতিমালা আশ্রয় করে কলেজস্তরের শিক্ষা
-              প্রসারে সম্ভাবনার সৃষ্টি করে`;
 
 // 10 Notices will be fetched from Firestore
 export const noticesList: Notice[] = [

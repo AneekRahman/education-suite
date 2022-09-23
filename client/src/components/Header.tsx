@@ -25,18 +25,18 @@ import {
 import { BiChevronDown } from "react-icons/bi";
 import { FiBook, FiMenu } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import { movingHealine, MyTab, SITENAME, tabsList } from "./constansts";
+import { MyTab, SiteInfo, SITENAME, tabsList } from "./constansts";
 
-export default function Header() {
+export default function Header({ siteInfo }: { siteInfo: SiteInfo }) {
   return (
     <div className={styles.Header}>
       <Flex justifyContent="flex-start" className={styles.UpperRowWrapper}>
         <div className={styles.MobileMovingHeadlineWrapper}>
-          <p>{movingHealine}</p>
+          <p>{siteInfo.movingHeader?.label}</p>
         </div>
         <Flex width="100%">
           <Image className={styles.Logo} src="/assets/header-logo.png" alt="" />
-          <UpperColumNextToLogo />
+          <UpperColumNextToLogo siteInfo={siteInfo} />
         </Flex>
       </Flex>
       <LowerRowMenu />
@@ -44,11 +44,11 @@ export default function Header() {
   );
 }
 
-function UpperColumNextToLogo() {
+function UpperColumNextToLogo({ siteInfo }: { siteInfo: SiteInfo }) {
   return (
     <div className={styles.UpperColumn}>
       <div className={styles.PcMovingHeadlineWrapper}>
-        <p>{movingHealine}</p>
+        <p>{siteInfo.movingHeader?.label}</p>
       </div>
       <Flex
         className={styles.TitleWrapper}

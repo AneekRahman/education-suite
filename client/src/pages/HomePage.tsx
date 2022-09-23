@@ -21,21 +21,12 @@ import {
   eventsList,
   Notice,
   noticesList,
+  SiteInfo,
 } from "../components/constansts";
 import { Link } from "react-router-dom";
 import { EventsImageBox } from "../components/EventsImageBox";
 import { useEffect, useState } from "react";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
-
-interface SiteInfo {
-  eiin: number;
-  established: number;
-  movingHeader?: {
-    label: string;
-    link: string;
-  };
-  sitename: string;
-}
 
 export default function HomePage() {
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
@@ -48,6 +39,13 @@ export default function HomePage() {
   useEffect(() => {
     getDoc(doc(getFirestore(), "siteInfo/default")).then((snapshot) => {
       if (snapshot.exists()) {
+        const data = snapshot.data();
+        setsiteInfo({
+          eiin: data.eiin,
+          established: data.established,
+          movingHeader: data.movingHeader,
+          sitename: data.sitename,
+        });
       }
     });
   }, []);
@@ -56,7 +54,7 @@ export default function HomePage() {
     <div className={styles.HomePage}>
       <div className={styles.HeroWrapper}>
         <div className={styles.BgDarkGradient}></div>
-        <Header />
+        <Header siteInfo={siteInfo} />
         <div className={styles.HeroMainTextWrapper}>
           <h2>
             Excellence in
