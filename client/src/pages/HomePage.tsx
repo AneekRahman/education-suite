@@ -207,8 +207,6 @@ function EventsImageGrid({ eventsList }: { eventsList: Event[] }) {
 }
 
 function NoticeBox({ noticesList }: { noticesList: Notice[] }) {
-  if (noticesList.length === 0) return <></>;
-
   return (
     <Flex justifyContent="center" className={styles.NoticeBoxWrapper}>
       <div className={styles.NoticeFakeBox}></div>
@@ -267,6 +265,8 @@ function MessagesRow() {
 }
 
 function EventsBox({ eventsList }: { eventsList: Event[] }) {
+  if (eventsList.length === 0) return <></>;
+
   return (
     <div className={styles.HeroEventsWrapper}>
       <h3>{eventsList.length}/10 EVENTS</h3>
