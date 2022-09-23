@@ -221,7 +221,7 @@ function NoticeBox({ noticesList }: { noticesList: Notice[] }) {
             </div>
           ))}
           <Center flex={1}>
-            <Link to="/notice">
+            <Link to="/notices">
               <Button zIndex={1000} colorScheme="red">
                 SHOW ALL NOTICES
               </Button>

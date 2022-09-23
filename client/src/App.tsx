@@ -17,6 +17,7 @@ import ContactPageBody from "./pages/GenericPages/ContactPageBody";
 import NoticePageBody from "./pages/GenericPages/NoticePageBody";
 import EventsPageBody from "./pages/GenericPages/EventsPageBody";
 import FacultyPageBody from "./pages/GenericPages/FacultyPageBody";
+import ViewEventBody from "./pages/GenericPages/ViewEventBody";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
               }
             />
             <Route
-              path="/notice"
+              path="/notices"
               element={
                 <GenericPage title="NOTICE BOARD" body={<NoticePageBody />} />
               }
@@ -41,6 +42,12 @@ function App() {
               path="/events"
               element={
                 <GenericPage title="EVENTS HALL" body={<EventsPageBody />} />
+              }
+            />
+            <Route
+              path="/event/:eventUid"
+              element={
+                <GenericPage title="EVENT INFO" body={<ViewEventBody />} />
               }
             />
             <Route
