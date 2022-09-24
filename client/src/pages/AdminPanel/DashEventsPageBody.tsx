@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FirestoreRequests, Event } from "../../components/constansts";
 import styles from "../../styles/AdminPanel/DashboardPage.module.scss";
 import {
@@ -10,7 +10,15 @@ import {
   Text,
   Button,
   Link,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { IoIosAddCircle } from "react-icons/io";
 
 export default function DashEventsPageBody() {
   const [eventsList, setEventsList] = useState<Event[]>([]);
@@ -36,6 +44,15 @@ export default function DashEventsPageBody() {
 
   return (
     <Box p={10} className={styles.DashEventsPageBody}>
+      <Button
+        w="100%"
+        size="lg"
+        colorScheme="green"
+        leftIcon={<IoIosAddCircle />}
+      >
+        ADD A NEW EVENT
+      </Button>
+      <Box h={10} />
       <Heading color="red.400">Events List ({eventsList.length})</Heading>
       <Box h={4} />
       {eventsList.map((event: Event, i) => (
@@ -53,16 +70,16 @@ export default function DashEventsPageBody() {
           >
             {i + 1}
           </Center>
-          <Box className={styles.EventBox} p={2}>
+          <Box className={styles.EventBox} p={2} w="100%">
             <Text>{event.title}</Text>
             <Text>{new Date(event.timeCreated).toLocaleDateString()}</Text>
             <Box h={2} />
             <Flex>
-              <Link href={`/event/${event.id}`} isExternal>
-                <Button>VIEW EVENT</Button>
+              <Link href={`/event/${event.id}`} isExternal flex={1}>
+                <Button w="100%">VIEW EVENT</Button>
               </Link>
               <Box w={2} />
-              <Button color="red">DELETE EVENT</Button>
+              <DeleteAlertButtonDialogue event={event} />
             </Flex>
           </Box>
         </Flex>
@@ -87,5 +104,50 @@ export default function DashEventsPageBody() {
         </Button>
       </Center>
     </Box>
+  );
+}
+
+function DeleteAlertButtonDialogue({ event }: { event: Event }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef(null);
+
+  return (
+    <>
+      <Button colorScheme="red" onClick={onOpen}>
+        DELETE EVENT
+      </Button>
+
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              DELETE EVENT
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              <Text as="b">{event.title}</Text>
+              <Box h={2} />
+              <Text>
+                Are you sure you want to delete this? You can't undo this
+                action.
+              </Text>
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button colorScheme="red" onClick={(e) => {}} ml={3}>
+                Delete Event
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+    </>
   );
 }
