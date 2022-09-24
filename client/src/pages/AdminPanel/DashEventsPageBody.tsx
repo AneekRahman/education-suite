@@ -119,6 +119,7 @@ export default function DashEventsPageBody() {
 }
 
 function DeleteAlertButtonDialogue({ event }: { event: Event }) {
+  const [deleting, setDeleting] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
   const toast = useToast();
@@ -154,10 +155,14 @@ function DeleteAlertButtonDialogue({ event }: { event: Event }) {
                 Cancel
               </Button>
               <Button
+                isLoading={deleting}
                 colorScheme="red"
                 onClick={async (e) => {
+                  if (deleting) return;
                   try {
+                    setDeleting(true);
                     await deleteDoc(doc(getFirestore(), "events", event.id));
+                    setDeleting(false);
                     onClose();
                     toast({
                       title: "Deleted!",

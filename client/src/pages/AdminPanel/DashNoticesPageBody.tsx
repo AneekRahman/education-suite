@@ -139,6 +139,7 @@ function DeleteAlertButtonDialogue({ notice }: { notice: Notice }) {
                 Cancel
               </Button>
               <Button
+                isLoading={deleting}
                 colorScheme="red"
                 onClick={async (e) => {
                   if (deleting) return;
