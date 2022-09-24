@@ -26,7 +26,8 @@ import {
 import { BiChevronDown } from "react-icons/bi";
 import { FiBook, FiMenu } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
-import { MyTab, SiteInfo, SITENAME, tabsList } from "./constansts";
+import { MyTab, SiteInfo, tabsList } from "./constansts";
+import MyTexts from "./texts";
 
 export default function Header({ siteInfo }: { siteInfo: SiteInfo }) {
   return (
@@ -60,7 +61,7 @@ function UpperColumNextToLogo({ siteInfo }: { siteInfo: SiteInfo }) {
         justifyContent="space-between"
         alignItems="center"
       >
-        <h1>{SITENAME}</h1>
+        <h1>{MyTexts.SITENAME}</h1>
         <EIINBox />
         <Flex
           className={styles.MobileMenuWrapper}
@@ -103,7 +104,9 @@ function DrawerButton() {
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">{SITENAME}</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">
+            {MyTexts.SITENAME}
+          </DrawerHeader>
           <DrawerBody padding={0}>
             <MobileDrawerAccordionMenu />
           </DrawerBody>

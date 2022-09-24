@@ -9,12 +9,7 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
-import {
-  MAIN_EMAIL,
-  MAIN_PHONE_NUMBER,
-  SITENAME,
-  SITE_FULL_LINK,
-} from "../../components/constansts";
+import MyTexts from "../../components/texts";
 import styles from "../../styles/GenericPages/ContactPageBody.module.scss";
 
 export default function ContactPageBody() {
@@ -42,7 +37,7 @@ function ContactsTable() {
         <Tbody>
           <Tr>
             <Td>INSTITUTE NAME: </Td>
-            <Td isNumeric>{SITENAME}</Td>
+            <Td isNumeric>{MyTexts.SITENAME}</Td>
           </Tr>
           <Tr>
             <Td>HOUSE NO./ROAD NO.</Td>
@@ -82,15 +77,15 @@ function ContactsTable() {
           </Tr>
           <Tr>
             <Td>TELEPHONE</Td>
-            <Td isNumeric>{MAIN_PHONE_NUMBER}</Td>
+            <Td isNumeric>{MyTexts.CONTACT_PHONE_NUMBER}</Td>
           </Tr>
           <Tr>
             <Td>E-MAIL</Td>
-            <Td isNumeric>{MAIN_EMAIL}</Td>
+            <Td isNumeric>{MyTexts.CONTACT_EMAIL}</Td>
           </Tr>
           <Tr>
             <Td>WEBSITE</Td>
-            <Td isNumeric>{SITE_FULL_LINK}</Td>
+            <Td isNumeric>{MyTexts.SITE_FULL_LINK}</Td>
           </Tr>
         </Tbody>
       </Table>

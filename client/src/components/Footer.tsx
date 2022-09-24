@@ -9,7 +9,7 @@ import {
   Image,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { MAIN_EMAIL, SITENAME } from "./constansts";
+import MyTexts from "./texts";
 
 export default function Footer() {
   return (
@@ -20,11 +20,11 @@ export default function Footer() {
         gap={6}
       >
         <GridItem w="100%">
-          <Heading as="h3">{SITENAME}</Heading>
+          <Heading as="h3">{MyTexts.SITENAME}</Heading>
           <Text>আটঘরিয়া, পাবনা</Text>
           <Text>+880-1717-074097</Text>
           <Text>+880-1717-074097</Text>
-          <Text>{MAIN_EMAIL}</Text>
+          <Text>{MyTexts.CONTACT_EMAIL}</Text>
         </GridItem>
         <GridItem w="100%">
           <Heading as="h3">গুরুত্বপূর্ণ লিংক</Heading>

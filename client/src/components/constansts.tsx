@@ -43,11 +43,6 @@ export type { Event, Notice, MyTab, SiteInfo };
 
 // EXPORT THE CONSTANT VALUES --------------------
 
-export const SITENAME = "কয়রাবারী বহুমুখী উচ্চ বিদ্যালয়";
-export const SITE_FULL_LINK = "https://example.com";
-export const MAIN_EMAIL = "example@gmail.com";
-export const MAIN_PHONE_NUMBER = "০২-৫৮১৫৫৮৭১";
-
 export const tabsList: MyTab[] = [
   { label: "HOME", link: "/" },
   // {
