@@ -31,6 +31,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { IoIosAddCircle, IoMdClose } from "react-icons/io";
+import {
+  updateFirestoreField,
+  uploadFileToFirebase,
+} from "./DashboardPageBody";
+import { getDownloadURL, UploadResult } from "firebase/storage";
+import { collection, doc, getFirestore, deleteDoc } from "firebase/firestore";
 
 export default function DashEventsPageBody() {
   const [eventsList, setEventsList] = useState<Event[]>([]);
@@ -115,6 +121,7 @@ export default function DashEventsPageBody() {
 function DeleteAlertButtonDialogue({ event }: { event: Event }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
+  const toast = useToast();
 
   return (
     <>
@@ -146,7 +153,31 @@ function DeleteAlertButtonDialogue({ event }: { event: Event }) {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={(e) => {}} ml={3}>
+              <Button
+                colorScheme="red"
+                onClick={async (e) => {
+                  try {
+                    await deleteDoc(doc(getFirestore(), "events", event.id));
+                    onClose();
+                    toast({
+                      title: "Deleted!",
+                      description: "Deleted an event.",
+                      status: "success",
+                      duration: 9000,
+                      isClosable: true,
+                    });
+                  } catch (error) {
+                    toast({
+                      title: "Error!",
+                      description: error?.toString(),
+                      status: "error",
+                      duration: 9000,
+                      isClosable: true,
+                    });
+                  }
+                }}
+                ml={3}
+              >
                 Delete Event
               </Button>
             </AlertDialogFooter>
@@ -158,6 +189,7 @@ function DeleteAlertButtonDialogue({ event }: { event: Event }) {
 }
 
 function CreateNewModal({ forEvent }: { forEvent: boolean }) {
+  const [creating, setCreating] = useState(false);
   const [newTitle, setNewTitle] = useState<string>("");
   const [newFiles, setNewFiles] = useState<File[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -201,11 +233,13 @@ function CreateNewModal({ forEvent }: { forEvent: boolean }) {
 
           <ModalFooter>
             <Button
+              isLoading={creating}
               colorScheme="blue"
               mr={3}
-              onClick={(e) => {
-                // Restrict newFiles minimum 1 file when its [forEvent == true]
+              onClick={async (e) => {
+                if (creating) return;
                 if (newTitle === "" || (forEvent && newFiles.length === 0)) {
+                  // Restrict newFiles minimum 1 file when its [forEvent == true]
                   toast({
                     title: "Error!",
                     description: "Required criterias have not been fulfilled",
@@ -215,6 +249,58 @@ function CreateNewModal({ forEvent }: { forEvent: boolean }) {
                   });
                   return;
                 }
+
+                try {
+                  // Set loading start
+                  setCreating(true);
+
+                  // Create a unique uid
+                  const newUid = doc(
+                    collection(getFirestore(), forEvent ? "events" : "notices")
+                  ).id;
+
+                  // Upload the files to storage
+                  const newImageURLs = await uploadMultipleFiles(
+                    newFiles,
+                    newUid,
+                    forEvent
+                  );
+
+                  // Create the Firestore document
+                  await updateFirestoreField(
+                    forEvent ? "events" : "notices",
+                    newUid,
+                    {
+                      imageURLs: newImageURLs,
+                      timeCreated: new Date().getTime(),
+                      title: newTitle,
+                    }
+                  );
+
+                  // Show the success message
+                  toast({
+                    title: "Success!",
+                    description:
+                      "Created a new " + (forEvent ? "event." : "notice."),
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                  });
+                  // Close the modal
+                  onClose();
+                  setNewFiles([]);
+                  setNewTitle("");
+                } catch (error) {
+                  toast({
+                    title: "Error!",
+                    description: error?.toString(),
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                  });
+                }
+
+                setCreating(false);
               }}
             >
               Create New {forEvent ? "Event" : "Notice"}
@@ -291,3 +377,30 @@ function AddImageList({
     </Box>
   );
 }
+
+const uploadMultipleFiles = async (
+  files: File[],
+  newUid: string,
+  forEvent: boolean
+) => {
+  // First upload all the files
+  const fileUploadPromises: Promise<UploadResult>[] = [];
+  files.forEach((file) =>
+    fileUploadPromises.push(
+      uploadFileToFirebase(
+        forEvent ? `events/${newUid}` : `notices/${newUid}`,
+        null, // Create a new random uid for this file in Storage
+        file
+      )
+    )
+  );
+  const results = await Promise.all(fileUploadPromises);
+
+  // Get all the downloadURLs for all the files
+  const downloadURLPromises: Promise<string>[] = [];
+  results.forEach((result) => {
+    downloadURLPromises.push(getDownloadURL(result.ref));
+  });
+
+  return Promise.all(downloadURLPromises);
+};

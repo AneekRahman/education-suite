@@ -21,7 +21,7 @@ import {
   ref as storageRef,
   uploadBytes,
 } from "firebase/storage";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 
 export default function DashboardPageBody() {
   const [firestoreStillLoading, setFirestoreStillLoading] = useState(true);
@@ -254,7 +254,7 @@ function HeroImageUploadButton() {
   );
 }
 
-const updateFirestoreField = async (
+export const updateFirestoreField = async (
   collectionRef: string,
   docRef: string,
   newData: object
@@ -265,7 +265,7 @@ const updateFirestoreField = async (
   });
 };
 
-const uploadFileToFirebase = (
+export const uploadFileToFirebase = (
   folder: string,
   fileName: string | null,
   thumbFile: File
@@ -277,7 +277,9 @@ const uploadFileToFirebase = (
   } else {
     // If no fileName provided, add a random one
     fileName =
-      doc(getFirestore(), "RANDOM").id + "." + file.name.split(".").pop();
+      doc(collection(getFirestore(), "RANDOM")).id +
+      "." +
+      file.name.split(".").pop();
   }
   // Create the storage ref
   const myref = storageRef(getStorage(), `${folder}/${fileName}`);
