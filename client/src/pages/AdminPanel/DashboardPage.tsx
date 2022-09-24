@@ -86,7 +86,7 @@ function DashboardSideBox({
       height="100vh"
       borderRight="1px solid rgba(0,0,0,0.1)"
     >
-      <Image src={MyTexts.TRANSPARENT_LOGO_URL} width="100%" />
+      <Image src={MyTexts.HEADER_LOGO_URL} width="100%" />
       <Box height={10} />
       <Text>Welcome: {currentUser.email}</Text>
       <Text>- Admin</Text>

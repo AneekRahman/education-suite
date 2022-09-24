@@ -1,4 +1,14 @@
-import { Box, Button, Heading, Image, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Image,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { FirestoreRequests, SiteInfo } from "../../components/constansts";
@@ -31,6 +41,8 @@ export default function DashboardPageBody({
     <Box p={10} className={styles.DashboardPageBody}>
       <Heading color="red.400">Dashboard</Heading>
       <HeroImageUploadSection siteInfo={siteInfo} />
+      <Box h={10} />
+      <MovingHeaderSection siteInfo={siteInfo} />
     </Box>
   );
 }
@@ -39,11 +51,28 @@ function MovingHeaderSection({ siteInfo }: { siteInfo: SiteInfo }) {
   return (
     <Box
       w="100%"
-      p={2}
+      p={4}
       border="1px solid rgba(0,0,0,0.1)"
       borderRadius={10}
-      marginTop="1em"
-    ></Box>
+      backgroundColor="#f07070"
+    >
+      <Text as="b" color="white">
+        MOVING HEADER:
+      </Text>
+      <Box h={2} />
+      <InputGroup>
+        <InputLeftAddon children="Header Label" />
+        <Input
+          placeholder="Add the moving header text"
+          backgroundColor="white"
+        />
+      </InputGroup>
+      <Box h={2} />
+      <InputGroup>
+        <InputLeftAddon children="Header Link" />
+        <Input placeholder="https://....." backgroundColor="white" />
+      </InputGroup>
+    </Box>
   );
 }
 
@@ -51,11 +80,16 @@ function HeroImageUploadSection({ siteInfo }: { siteInfo: SiteInfo }) {
   return (
     <Box
       w="100%"
-      p={2}
+      p={4}
       border="1px solid rgba(0,0,0,0.1)"
       borderRadius={10}
+      backgroundColor="#f07070"
       marginTop="1em"
     >
+      <Text as="b" color="white">
+        BACKGROUND IMAGE:
+      </Text>
+      <Box h={2} />
       <Image
         maxH="10em"
         w="100%"
@@ -63,7 +97,7 @@ function HeroImageUploadSection({ siteInfo }: { siteInfo: SiteInfo }) {
         objectFit="cover"
         src={siteInfo.bgImageURL}
       />
-      <Box h={2}></Box>
+      <Box h={4} />
       <HeroImageUploadButton />
     </Box>
   );
@@ -110,13 +144,11 @@ function HeroImageUploadButton() {
               const downloadURL = await getDownloadURL(uploadTask.ref);
 
               // Update in firebase Firestore
-              await setDoc(
-                doc(getFirestore(), "siteInfo", "default"),
-                {
-                  bgImageURL: downloadURL,
-                },
-                { merge: true }
-              );
+              await updateFirestoreField("siteInfo", "default", {
+                bgImageURL: downloadURL,
+              });
+
+              // Show the success message
               toast({
                 title: "Success!",
                 description: "Uploaded new home background image!",
@@ -149,6 +181,17 @@ function HeroImageUploadButton() {
   );
 }
 
+const updateFirestoreField = async (
+  collectionRef: string,
+  docRef: string,
+  newData: object
+) => {
+  // Update in firebase Firestore
+  await setDoc(doc(getFirestore(), collectionRef, docRef), newData, {
+    merge: true,
+  });
+};
+
 const uploadFileToFirebase = (
   folder: string,
   fileName: string | null,
@@ -157,10 +200,11 @@ const uploadFileToFirebase = (
   const file = thumbFile;
   if (fileName) {
     // Append the type to the fileName provided
-    fileName = fileName + file.name.split(".").pop();
+    fileName = fileName + "." + file.name.split(".").pop();
   } else {
     // If no fileName provided, add a random one
-    fileName = doc(getFirestore(), "RANDOM").id + file.name.split(".").pop();
+    fileName =
+      doc(getFirestore(), "RANDOM").id + "." + file.name.split(".").pop();
   }
   // Create the storage ref
   const myref = storageRef(getStorage(), `${folder}/${fileName}`);
