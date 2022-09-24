@@ -22,7 +22,7 @@ interface Event {
   id: string;
   timeCreated: number; // 1663945988679
   title: string;
-  imageURLs: string[];
+  fileURLs: string[];
 }
 
 interface Notice {
@@ -167,7 +167,7 @@ export class FirestoreRequests {
           id: snapshot.id,
           timeCreated: data.timeCreated,
           title: data.title,
-          imageURLs: data.imageURLs,
+          fileURLs: data.fileURLs,
         };
       });
       return events;

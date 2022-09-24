@@ -49,12 +49,12 @@ export default function ViewEventBody() {
       <i>Event details:</i>
       <h3>{thisEvent?.title}</h3>
       <p>{new Date(thisEvent?.timeCreated).toLocaleDateString()}</p>
-      <CarouselGallery imageURLs={thisEvent.imageURLs} />
+      <CarouselGallery fileURLs={thisEvent.fileURLs} />
     </div>
   );
 }
 
-function CarouselGallery({ imageURLs }: { imageURLs: string[] }) {
+function CarouselGallery({ fileURLs }: { fileURLs: string[] }) {
   return (
     <div className={styles.CarouselWrapper}>
       <Carousel
@@ -78,7 +78,7 @@ function CarouselGallery({ imageURLs }: { imageURLs: string[] }) {
           );
         }}
       >
-        {imageURLs.map((url) => (
+        {fileURLs.map((url) => (
           <div className={styles.CarouselItem}>
             <img src={url} alt="" />
           </div>

@@ -11,7 +11,7 @@ export function EventsImageBox({ event }: { event: Event }) {
         <Image
           objectFit="cover"
           className={styles.Image}
-          src={event.imageURLs[0]}
+          src={event.fileURLs[0]}
         />
         <Flex
           flexDirection="column"
