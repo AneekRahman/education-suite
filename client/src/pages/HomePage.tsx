@@ -240,13 +240,10 @@ function MessagesRow() {
         <h3>MESSAGES</h3>
 
         <Flex className={styles.MessageColumn} alignItems="center">
-          <img
-            src="https://media.istockphoto.com/vectors/default-avatar-photo-placeholder-icon-grey-profile-picture-business-vector-id1327592506?k=20&m=1327592506&s=612x612&w=0&h=hgMOPfz7H-CYP_CQ0wbv3IwRkbQna32xWUPoXtMyg5M="
-            alt=""
-          />
+          <img src={MyTexts.MESSAGE_PERSON1_URL} alt="" />
           <div>
-            <h4>MR. JOHN DOE</h4>
-            <p>PRINCIPAL</p>
+            <h4>{MyTexts.MESSAGE_PERSON1_NAME}</h4>
+            <p>{MyTexts.MESSAGE_PERSON1_POSITION}</p>
           </div>
         </Flex>
         <Flex className={styles.MessageColumn} alignItems="center">

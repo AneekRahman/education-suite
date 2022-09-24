@@ -19,4 +19,9 @@ export default class MyTexts {
   // Texts /assets/ url
   static HEADER_LOGO_URL: string = "/assets/header-logo.png";
   static TRANSPARENT_LOGO_URL: string = "/logo.png";
+  static MESSAGE_PERSON1_URL: string = "/assets/msg_person1.png";
+
+  // Messages
+  static MESSAGE_PERSON1_NAME: string = "MD. ZILLUR RAHMAN";
+  static MESSAGE_PERSON1_POSITION: string = "HEAD MASTER";
 }
