@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 import { FirestoreRequests, Notice } from "../../components/constansts";
 import styles from "../../styles/GenericPages/ViewNoticeBody.module.scss";
 import { BsFileEarmarkPdfFill } from "react-icons/bs";
+import { WebShareModal } from "./ViewEventBody";
 
 export default function ViewNoticeBody() {
   const location = useLocation();
@@ -62,6 +63,7 @@ export default function ViewNoticeBody() {
       <i>Notice details:</i>
       <h3>{thisNotice?.title}</h3>
       <p>{new Date(thisNotice?.timeCreated).toLocaleDateString()}</p>
+      <WebShareModal title={thisNotice.title} />
 
       <Flex className={styles.FilesRowWrapper}>
         {thisNotice.fileURLs.map((url, i) => (

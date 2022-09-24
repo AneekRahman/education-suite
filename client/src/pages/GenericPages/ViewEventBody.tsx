@@ -1,4 +1,4 @@
-import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Box, Button, Center, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FirestoreRequests, Event } from "../../components/constansts";
@@ -6,6 +6,8 @@ import styles from "../../styles/GenericPages/ViewEventBody.module.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { RWebShare } from "react-web-share";
+import { BiShare } from "react-icons/bi";
 
 export default function ViewEventBody() {
   const [thisEvent, setShisEvent] = useState<Event | undefined>(undefined);
@@ -49,6 +51,7 @@ export default function ViewEventBody() {
       <i>Event details:</i>
       <h3>{thisEvent?.title}</h3>
       <p>{new Date(thisEvent?.timeCreated).toLocaleDateString()}</p>
+      <WebShareModal title={thisEvent.title} />
       <CarouselGallery fileURLs={thisEvent.fileURLs} />
     </div>
   );
@@ -85,5 +88,21 @@ function CarouselGallery({ fileURLs }: { fileURLs: string[] }) {
         ))}
       </Carousel>
     </div>
+  );
+}
+
+export function WebShareModal({ title }: { title: string }) {
+  return (
+    <RWebShare
+      data={{
+        url: window.location.href,
+        title,
+      }}
+      onClick={() => console.log("shared successfully!")}
+    >
+      <Button colorScheme="blackAlpha" marginTop={2} leftIcon={<BiShare />}>
+        Share on social media
+      </Button>
+    </RWebShare>
   );
 }
