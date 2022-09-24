@@ -16,11 +16,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
-import { FaClipboardList } from "react-icons/fa";
+import { FaClipboardList, FaHome } from "react-icons/fa";
 import { BsGridFill } from "react-icons/bs";
 import MyTexts from "../../components/texts";
 import styles from "../../styles/AdminPanel/DashboardPage.module.scss";
 import DashboardPageBody from "./DashboardPageBody";
+import DashEventsPageBody from "./DashEventsPageBody";
 
 export default function DashboardPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -58,9 +59,8 @@ export default function DashboardPage() {
                 setPageCount={setPageCount}
                 currentUser={currentUser}
               />
-              {pageCount === 0 ? (
-                <DashboardPageBody currentUser={currentUser} />
-              ) : null}
+              {pageCount === 0 ? <DashboardPageBody /> : null}
+              {pageCount === 1 ? <DashEventsPageBody /> : null}
             </Flex>
           )}
         </div>
@@ -90,13 +90,30 @@ function DashboardSideBox({
       <Text>Welcome: {currentUser.email}</Text>
       <Text>- Admin</Text>
       <Box height={4} />
-      <Button width="100%" leftIcon={<FaClipboardList />}>
-        SHOW NOTICE LIST
+      <Button
+        width="100%"
+        leftIcon={<FaHome />}
+        onClick={(e) => setPageCount(0)}
+      >
+        DASHBOARD HOME
       </Button>
       <Box height={4} />
-      <Button width="100%" leftIcon={<BsGridFill />}>
+      <Button
+        width="100%"
+        leftIcon={<BsGridFill />}
+        onClick={(e) => setPageCount(1)}
+      >
         SHOW EVENTS LIST
       </Button>
+      <Box height={4} />
+      <Button
+        width="100%"
+        leftIcon={<FaClipboardList />}
+        onClick={(e) => setPageCount(2)}
+      >
+        SHOW NOTICE LIST
+      </Button>
+
       <Box height={4} />
       <Button color="red" width="100%" onClick={(e) => getAuth().signOut()}>
         Logout

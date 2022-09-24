@@ -11,8 +11,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { User } from "firebase/auth";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FirestoreRequests, SiteInfo } from "../../components/constansts";
 import styles from "../../styles/AdminPanel/DashboardPage.module.scss";
 import { FaCamera } from "react-icons/fa";
@@ -24,11 +23,7 @@ import {
 } from "firebase/storage";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 
-export default function DashboardPageBody({
-  currentUser,
-}: {
-  currentUser: User;
-}) {
+export default function DashboardPageBody() {
   const [firestoreStillLoading, setFirestoreStillLoading] = useState(true);
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
     movingHeader: { label: "", link: "" },
@@ -175,6 +170,7 @@ function HeroImageUploadSection({ siteInfo }: { siteInfo: SiteInfo }) {
         This background image is used as the primary background image for all of
         the pages across the website.
       </Text>
+      <Text>Max file size: 1500 KB </Text>
       <Text>Can be updated frequently. </Text>
     </Box>
   );
