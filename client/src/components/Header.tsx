@@ -39,7 +39,7 @@ export default function Header({ siteInfo }: { siteInfo: SiteInfo }) {
           </ChakraLink>
         </div>
         <Flex width="100%">
-          <Image className={styles.Logo} src="/assets/header-logo.png" alt="" />
+          <Image className={styles.Logo} src={MyTexts.HEADER_LOGO} alt="" />
           <UpperColumNextToLogo siteInfo={siteInfo} />
         </Flex>
       </Flex>
@@ -252,11 +252,11 @@ function EIINBox() {
       display="flex"
     >
       <Text color="white" fontWeight="800">
-        ESTABLISHED: 1972
+        {MyTexts.ESTABLISHED}
       </Text>
       <Divider m="2" orientation="vertical" />
       <Text color="white" fontWeight="800">
-        EIIN: 125260
+        {MyTexts.EIIN_NUMBER}
       </Text>
     </Box>
   );

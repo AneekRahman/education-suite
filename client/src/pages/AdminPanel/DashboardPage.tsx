@@ -5,12 +5,23 @@ import {
   signInWithPopup,
   User,
 } from "firebase/auth";
-import { Box, Button, Center, Text, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import MyTexts from "../../components/texts";
+import styles from "../../styles/AdminPanel/DashboardPage.module.scss";
+import DashboardPageBody from "./DashboardPageBody";
 
 export default function DashboardPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     // Listen to auth state changed
@@ -25,9 +36,19 @@ export default function DashboardPage() {
         <div>
           {/* Check if account has access */}
           {currentUser.uid !== MyTexts.SERVER_ACCOUNT_UID ? (
+            //  Don't show dashboard
             <AccountNoAccess />
           ) : (
-            <DashboardSideBox currentUser={currentUser} />
+            // Show dashboard
+            <Flex>
+              <DashboardSideBox
+                setPageCount={setPageCount}
+                currentUser={currentUser}
+              />
+              {pageCount === 0 ? (
+                <DashboardPageBody currentUser={currentUser} />
+              ) : null}
+            </Flex>
           )}
         </div>
       ) : (
@@ -37,11 +58,26 @@ export default function DashboardPage() {
   );
 }
 
-function DashboardSideBox({ currentUser }: { currentUser: User }) {
+function DashboardSideBox({
+  currentUser,
+  setPageCount,
+}: {
+  currentUser: User;
+  setPageCount: Function;
+}) {
   return (
-    <Box p={20}>
-      <Text>Welcome: {currentUser.displayName}. This is the dashboard</Text>
-      <Button onClick={(e) => getAuth().signOut()}>Logout</Button>
+    <Box
+      className={styles.SideBoxWrapper}
+      p={10}
+      maxW={300}
+      height="100vh"
+      borderRight="1px solid rgba(0,0,0,0.1)"
+    >
+      <Heading>Welcome: {currentUser.displayName}</Heading>
+      <Box height={10} />
+      <Button width="100%" onClick={(e) => getAuth().signOut()}>
+        Logout
+      </Button>
     </Box>
   );
 }
