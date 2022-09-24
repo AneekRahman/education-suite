@@ -1,9 +1,17 @@
 export default class MyTexts {
+  // Server
   static SERVER_ACCOUNT_UID: string = "IN3K0LR0iIUDtr0sfLC2Y2Tpiac2";
-  static SITENAME: string = "কয়রাবারী বহুমুখী উচ্চ বিদ্যালয়";
-  static ESTABLISHED: string = "ESTABLISHED: 1972";
-  static EIIN_NUMBER: string = "EIIN: 125260";
 
+  // Home
+  static SITENAME: string = "কয়রাবারী বহুমুখী উচ্চ বিদ্যালয়";
+  static HERO_OVERLAY_TEXT: string = "Excellence in \nKnowledge";
+  static ESTABLISHED: string = "1972";
+  static EIIN_NUMBER: string = "125260";
+  static LOCATION: string = "ATGHARIA, PABNA";
+  // Home Bottom Numbers
+  static REG_NO: string = "125260 (RAJSHAHI)";
+
+  // Contact
   static SITE_FULL_LINK: string = "https://example.com";
   static CONTACT_EMAIL: string = "example@gmail.com";
   static CONTACT_PHONE_NUMBER: string = "০২-৫৮১৫৫৮৭১";

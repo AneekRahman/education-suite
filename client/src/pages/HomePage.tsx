@@ -14,6 +14,7 @@ import {
   Tr,
   Tbody,
   Td,
+  Box,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import {
@@ -25,6 +26,7 @@ import {
 import { Link } from "react-router-dom";
 import { EventsImageBox } from "../components/EventsImageBox";
 import { useEffect, useState } from "react";
+import MyTexts from "../components/texts";
 
 export default function HomePage() {
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
@@ -58,13 +60,9 @@ export default function HomePage() {
       >
         <div className={styles.BgDarkGradient}></div>
         <Header siteInfo={siteInfo} />
-        <div className={styles.HeroMainTextWrapper}>
-          <h2>
-            Excellence in
-            <br />
-            Knowledge
-          </h2>
-        </div>
+        <Box maxW={500} className={styles.HeroMainTextWrapper}>
+          <h2>{MyTexts.HERO_OVERLAY_TEXT}</h2>
+        </Box>
         <EventsBox eventsList={eventsList} />
       </div>
       <MessagesRow />
@@ -91,7 +89,7 @@ function LocationAboutBox() {
           <div className={styles.TextsWrapper}>
             <Heading as="h3">FIND OUR LOCATION</Heading>
             <Flex height="100%" alignItems="center">
-              <Text>ATGHARIA, PABNA</Text>
+              <Text>{MyTexts.LOCATION}</Text>
             </Flex>
           </div>
 
@@ -124,9 +122,9 @@ function LocationAboutBox() {
                 <Td>UPO NO DEGREE</Td>
               </Tr>
               <Tr>
-                <Td>125260</Td>
+                <Td>{MyTexts.EIIN_NUMBER}</Td>
                 <Td>10000</Td>
-                <Td>10000 (Rajshahi)</Td>
+                <Td>{MyTexts.REG_NO}</Td>
                 <Td>10000</Td>
                 <Td>10000</Td>
                 <Td>10000</Td>

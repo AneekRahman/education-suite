@@ -252,11 +252,11 @@ function EIINBox() {
       display="flex"
     >
       <Text color="white" fontWeight="800">
-        {MyTexts.ESTABLISHED}
+        ESTABLISHED: {MyTexts.ESTABLISHED}
       </Text>
       <Divider m="2" orientation="vertical" />
       <Text color="white" fontWeight="800">
-        {MyTexts.EIIN_NUMBER}
+        EIIN: {MyTexts.EIIN_NUMBER}
       </Text>
     </Box>
   );
