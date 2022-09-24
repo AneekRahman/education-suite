@@ -10,25 +10,38 @@ import {
   Button,
   Center,
   Flex,
-  Heading,
+  Image,
+  Spinner,
   Text,
   useToast,
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
+import { FaClipboardList } from "react-icons/fa";
+import { BsGridFill } from "react-icons/bs";
 import MyTexts from "../../components/texts";
 import styles from "../../styles/AdminPanel/DashboardPage.module.scss";
 import DashboardPageBody from "./DashboardPageBody";
 
 export default function DashboardPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [firestoreStillLoading, setFirestoreStillLoading] = useState(true);
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
     // Listen to auth state changed
     getAuth().onAuthStateChanged((user) => {
       setCurrentUser(user);
+      setFirestoreStillLoading(false);
     });
   }, []);
+
+  if (firestoreStillLoading) {
+    return (
+      <Center height="100vh">
+        <Spinner size="lg" />
+      </Center>
+    );
+  }
 
   return (
     <div>
@@ -69,13 +82,24 @@ function DashboardSideBox({
     <Box
       className={styles.SideBoxWrapper}
       p={10}
-      maxW={300}
+      maxW={330}
       height="100vh"
       borderRight="1px solid rgba(0,0,0,0.1)"
     >
-      <Heading>Welcome: {currentUser.displayName}</Heading>
+      <Image src={MyTexts.TRANSPARENT_LOGO_URL} width="100%" />
       <Box height={10} />
-      <Button width="100%" onClick={(e) => getAuth().signOut()}>
+      <Text>Welcome: {currentUser.email}</Text>
+      <Text>- Admin</Text>
+      <Box height={4} />
+      <Button width="100%" leftIcon={<FaClipboardList />}>
+        SHOW NOTICE LIST
+      </Button>
+      <Box height={4} />
+      <Button width="100%" leftIcon={<BsGridFill />}>
+        SHOW EVENTS LIST
+      </Button>
+      <Box height={4} />
+      <Button color="red" width="100%" onClick={(e) => getAuth().signOut()}>
         Logout
       </Button>
     </Box>

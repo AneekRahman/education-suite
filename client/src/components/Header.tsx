@@ -39,7 +39,7 @@ export default function Header({ siteInfo }: { siteInfo: SiteInfo }) {
           </ChakraLink>
         </div>
         <Flex width="100%">
-          <Image className={styles.Logo} src={MyTexts.HEADER_LOGO} alt="" />
+          <Image className={styles.Logo} src={MyTexts.HEADER_LOGO_URL} alt="" />
           <UpperColumNextToLogo siteInfo={siteInfo} />
         </Flex>
       </Flex>

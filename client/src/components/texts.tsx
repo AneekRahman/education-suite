@@ -17,5 +17,6 @@ export default class MyTexts {
   static CONTACT_PHONE_NUMBER: string = "০২-৫৮১৫৫৮৭১";
 
   // Texts /assets/ url
-  static HEADER_LOGO: string = "/assets/header-logo.png";
+  static HEADER_LOGO_URL: string = "/assets/header-logo.png";
+  static TRANSPARENT_LOGO_URL: string = "/logo.png";
 }
