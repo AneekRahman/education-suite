@@ -1,11 +1,13 @@
 import {
   Box,
   Button,
+  Center,
   Heading,
   Image,
   Input,
   InputGroup,
   InputLeftAddon,
+  Spinner,
   Text,
   useToast,
 } from "@chakra-ui/react";
@@ -27,6 +29,7 @@ export default function DashboardPageBody({
 }: {
   currentUser: User;
 }) {
+  const [firestoreStillLoading, setFirestoreStillLoading] = useState(true);
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
     movingHeader: { label: "", link: "" },
     bgImageURL: "",
@@ -34,8 +37,19 @@ export default function DashboardPageBody({
   // componentDidMount
   useEffect(() => {
     // Get /siteInfo/
-    FirestoreRequests.getSiteInfo().then((siteInfo) => setsiteInfo(siteInfo));
+    FirestoreRequests.getSiteInfo().then((siteInfo) => {
+      setsiteInfo(siteInfo);
+      setFirestoreStillLoading(false);
+    });
   }, []);
+
+  if (firestoreStillLoading) {
+    return (
+      <Center height="100vh" w="100%">
+        <Spinner size="lg" />
+      </Center>
+    );
+  }
 
   return (
     <Box p={10} className={styles.DashboardPageBody}>
@@ -48,6 +62,13 @@ export default function DashboardPageBody({
 }
 
 function MovingHeaderSection({ siteInfo }: { siteInfo: SiteInfo }) {
+  const toast = useToast();
+  const [updating, setUpdating] = useState(false);
+  const [newMovingHeaderObject, setNewMovingHeaderObject] = useState({
+    label: siteInfo.movingHeader.label,
+    link: siteInfo.movingHeader.link,
+  });
+
   return (
     <Box
       w="100%"
@@ -57,21 +78,71 @@ function MovingHeaderSection({ siteInfo }: { siteInfo: SiteInfo }) {
       backgroundColor="#f07070"
     >
       <Text as="b" color="white">
-        MOVING HEADER:
+        ANIMATED HEADER:
       </Text>
       <Box h={2} />
       <InputGroup>
-        <InputLeftAddon children="Header Label" />
+        <InputLeftAddon children="Header Label*" />
         <Input
-          placeholder="Add the moving header text"
+          placeholder="Add the animated header text"
           backgroundColor="white"
+          value={newMovingHeaderObject.label}
+          onChange={(e) => {
+            setNewMovingHeaderObject({
+              label: e.target.value,
+              link: newMovingHeaderObject.link,
+            });
+          }}
         />
       </InputGroup>
       <Box h={2} />
       <InputGroup>
-        <InputLeftAddon children="Header Link" />
-        <Input placeholder="https://....." backgroundColor="white" />
+        <InputLeftAddon children="Header Link*" />
+        <Input
+          placeholder="https://....."
+          backgroundColor="white"
+          value={newMovingHeaderObject.link}
+          onChange={(e) => {
+            setNewMovingHeaderObject({
+              label: newMovingHeaderObject.label,
+              link: e.target.value,
+            });
+          }}
+        />
       </InputGroup>
+      <Box h={2} />
+      <Button
+        isLoading={updating}
+        w="100%"
+        color="blue.400"
+        leftIcon={<FaCamera />}
+        onClick={async (e) => {
+          if (updating) return;
+          setUpdating(true);
+          // Update in firebase Firestore
+          await updateFirestoreField("siteInfo", "default", {
+            movingHeader: newMovingHeaderObject,
+          });
+          // Show the success message
+          toast({
+            title: "Success!",
+            description: "Successfully updated in database.",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
+          setUpdating(false);
+        }}
+      >
+        UPDATE HEADER
+      </Button>
+      <Box h={2} />
+      <Text>(*) Marked is required</Text>
+      <Text>
+        By clicking this header at the top of the website, a new tab will open
+        for the user with the provided url.
+      </Text>
+      <Text>Can be updated frequently. </Text>
     </Box>
   );
 }
@@ -99,6 +170,12 @@ function HeroImageUploadSection({ siteInfo }: { siteInfo: SiteInfo }) {
       />
       <Box h={4} />
       <HeroImageUploadButton />
+      <Box h={2} />
+      <Text>
+        This background image is used as the primary background image for all of
+        the pages across the website.
+      </Text>
+      <Text>Can be updated frequently. </Text>
     </Box>
   );
 }

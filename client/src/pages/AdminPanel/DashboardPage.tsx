@@ -83,7 +83,6 @@ function DashboardSideBox({
       className={styles.SideBoxWrapper}
       p={10}
       maxW={330}
-      height="100vh"
       borderRight="1px solid rgba(0,0,0,0.1)"
     >
       <Image src={MyTexts.HEADER_LOGO_URL} width="100%" />

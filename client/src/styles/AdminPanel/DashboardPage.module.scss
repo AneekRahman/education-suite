@@ -3,6 +3,7 @@
 .SideBoxWrapper {
   font-weight: 900;
   background-color: #f07070;
+  min-height: 100vh;
 
   p {
     color: white;
@@ -11,4 +12,8 @@
 
 .DashboardPageBody {
   width: 100%;
+
+  p {
+    color: white;
+  }
 }
