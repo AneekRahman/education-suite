@@ -19,6 +19,7 @@ import EventsPageBody from "./pages/GenericPages/EventsPageBody";
 import FacultyPageBody from "./pages/GenericPages/FacultyPageBody";
 import ViewEventBody from "./pages/GenericPages/ViewEventBody";
 import ViewNoticeBody from "./pages/GenericPages/ViewNoticeBody";
+import DashboardPage from "./pages/AdminPanel/DashboardPage";
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
                 <GenericPage title="FACULTY" body={<FacultyPageBody />} />
               }
             />
+            <Route path="/dashboard" element={<DashboardPage />} />
             {/* If any not found links are requested go to home page */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
