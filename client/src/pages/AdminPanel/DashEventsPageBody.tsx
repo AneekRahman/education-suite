@@ -188,7 +188,7 @@ function DeleteAlertButtonDialogue({ event }: { event: Event }) {
   );
 }
 
-function CreateNewModal({ forEvent }: { forEvent: boolean }) {
+export function CreateNewModal({ forEvent }: { forEvent: boolean }) {
   const [creating, setCreating] = useState(false);
   const [newTitle, setNewTitle] = useState<string>("");
   const [newFiles, setNewFiles] = useState<File[]>([]);
@@ -224,8 +224,8 @@ function CreateNewModal({ forEvent }: { forEvent: boolean }) {
               <Text>* Title is required</Text>
             </FormControl>
             <Box h={4} />
-            <AddImageList
-              forEvent={true}
+            <AddFilesList
+              forEvent={forEvent}
               newFiles={newFiles}
               setNewFiles={setNewFiles}
             />
@@ -260,7 +260,7 @@ function CreateNewModal({ forEvent }: { forEvent: boolean }) {
                   ).id;
 
                   // Upload the files to storage
-                  const newImageURLs = await uploadMultipleFiles(
+                  const newFilesURLs = await uploadMultipleFiles(
                     newFiles,
                     newUid,
                     forEvent
@@ -271,7 +271,7 @@ function CreateNewModal({ forEvent }: { forEvent: boolean }) {
                     forEvent ? "events" : "notices",
                     newUid,
                     {
-                      imageURLs: newImageURLs,
+                      fileURLs: newFilesURLs,
                       timeCreated: new Date().getTime(),
                       title: newTitle,
                     }
@@ -313,7 +313,7 @@ function CreateNewModal({ forEvent }: { forEvent: boolean }) {
   );
 }
 
-function AddImageList({
+function AddFilesList({
   forEvent,
   newFiles,
   setNewFiles,
@@ -337,8 +337,9 @@ function AddImageList({
       <Box h={2} />
       {/* When it comes to notices, you don't have this restriction */}
       {newFiles.length === 0 && forEvent ? (
-        <Box>* At least 1 image is required</Box>
+        <Box>* At least 1 {forEvent ? "image" : "PDF file"} is required</Box>
       ) : null}
+      <Text>Max file size: 1500 KB</Text>
       {newFiles.map((file) => (
         <Flex
           p={2}
@@ -369,7 +370,10 @@ function AddImageList({
         type="file"
         accept={forEvent ? "image/*" : "application/pdf"}
         onChange={async (event) => {
-          if (event.target.files) {
+          if (
+            event.target.files &&
+            event.target.files[0].size <= 1.5 * 1024 * 1024
+          ) {
             setNewFiles([...newFiles, event.target.files[0]]);
           }
         }}

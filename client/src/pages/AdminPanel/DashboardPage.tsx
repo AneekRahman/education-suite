@@ -22,6 +22,7 @@ import MyTexts from "../../components/texts";
 import styles from "../../styles/AdminPanel/DashboardPage.module.scss";
 import DashboardPageBody from "./DashboardPageBody";
 import DashEventsPageBody from "./DashEventsPageBody";
+import DashNoticesPageBody from "./DashNoticesPageBody";
 
 export default function DashboardPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -61,6 +62,7 @@ export default function DashboardPage() {
               />
               {pageCount === 0 ? <DashboardPageBody /> : null}
               {pageCount === 1 ? <DashEventsPageBody /> : null}
+              {pageCount === 2 ? <DashNoticesPageBody /> : null}
             </Flex>
           )}
         </div>
