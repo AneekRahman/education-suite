@@ -253,7 +253,8 @@
     }
   }
 
-  .FacebookPostsGrid {
+  .FacebookPostsGridWrapper {
+    z-index: 1000;
     position: relative;
     margin-top: 4em;
     padding: 3em;
@@ -391,6 +392,14 @@
             }
           }
         }
+      }
+    }
+
+    .FacebookPostsGridWrapper {
+      padding: 1em;
+
+      .FacebookPostsGrid {
+        grid-template-columns: repeat(auto-fill, 100%);
       }
     }
 

@@ -102,62 +102,59 @@ interface FacebookPost {
 const facebookPosts: FacebookPost[] = [
   {
     id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    postURL:
+      "https://www.facebook.com/100032460446844/videos/2073272926046281/",
     timeCreated: 1663945988679,
   },
   {
     id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    postURL:
+      "https://www.facebook.com/100032460446844/videos/1019905008525570/",
     timeCreated: 1663945988679,
   },
   {
     id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    postURL: "https://www.facebook.com/100032460446844/videos/601821006903917",
     timeCreated: 1663945988679,
   },
   {
     id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    postURL: "https://www.facebook.com/100032460446844/videos/1935331606507081",
     timeCreated: 1663945988679,
   },
   {
     id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    postURL: "https://www.facebook.com/100032460446844/videos/2002375433136031",
     timeCreated: 1663945988679,
   },
   {
     id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
-    timeCreated: 1663945988679,
-  },
-  {
-    id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
-    timeCreated: 1663945988679,
-  },
-  {
-    id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
-    timeCreated: 1663945988679,
-  },
-  {
-    id: "",
-    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    postURL: "https://www.facebook.com/100032460446844/videos/2073251576048416",
     timeCreated: 1663945988679,
   },
 ];
 
 function FacebookPostsGrid() {
+  if (facebookPosts.length === 0) return <></>;
+
   return (
-    <Box className={styles.FacebookPostsGrid}>
+    <Box className={styles.FacebookPostsGridWrapper}>
       <h3>RECENT FACEBOOK POSTS</h3>
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-        {facebookPosts.map((facebookPost: FacebookPost) => (
+      <Grid
+        className={styles.FacebookPostsGrid}
+        templateColumns="repeat(3, 1fr)"
+        gap={6}
+      >
+        {facebookPosts.map((facebookPost: FacebookPost, i) => (
           <GridItem className={styles.FacebookPostGridItem}>
             <FacebookEmbed url={facebookPost.postURL} width="100%" />
           </GridItem>
         ))}
       </Grid>
+      <Spacer h="6" />
+      <Center>
+        <Button colorScheme="red">GO TO OUR FACEBOOK</Button>
+      </Center>
     </Box>
   );
 }
@@ -334,9 +331,9 @@ function NoticeBox({ noticesList }: { noticesList: Notice[] }) {
               </div>
             </Link>
           ))}
-          <Center flex={1}>
+          <Center>
             <Link to="/notices">
-              <Button zIndex={1000} colorScheme="red">
+              <Button zIndex={1000} colorScheme="blackAlpha">
                 SHOW ALL NOTICES
               </Button>
             </Link>
