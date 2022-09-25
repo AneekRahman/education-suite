@@ -29,6 +29,7 @@ import { Link } from "react-router-dom";
 import { EventsImageBox } from "../components/EventsImageBox";
 import { useEffect, useState } from "react";
 import MyTexts from "../components/texts";
+import { FacebookEmbed } from "react-social-media-embed";
 
 export default function HomePage() {
   const [siteInfo, setsiteInfo] = useState<SiteInfo>({
@@ -80,6 +81,7 @@ export default function HomePage() {
         <img src="/assets/wiggly-bg1.svg" className={styles.WiggleBg1} alt="" />
         <NoticeBox noticesList={noticesList} />
       </div>
+      <FacebookPostsGrid />
       <div className={styles.WigglyBg2Wrapper}>
         <img src="/assets/wiggly-bg2.svg" className={styles.WiggleBg2} alt="" />
         <EventsImageGrid eventsList={eventsList} />
@@ -88,6 +90,75 @@ export default function HomePage() {
       <LocationAboutBox />
       <Footer />
     </div>
+  );
+}
+
+interface FacebookPost {
+  id: string;
+  postURL: string;
+  timeCreated: number;
+}
+
+const facebookPosts: FacebookPost[] = [
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+  {
+    id: "",
+    postURL: "https://www.facebook.com/20531316728/posts/10154009990506729/",
+    timeCreated: 1663945988679,
+  },
+];
+
+function FacebookPostsGrid() {
+  return (
+    <Box className={styles.FacebookPostsGrid}>
+      <h3>RECENT FACEBOOK POSTS</h3>
+      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        {facebookPosts.map((facebookPost: FacebookPost) => (
+          <GridItem className={styles.FacebookPostGridItem}>
+            <FacebookEmbed url={facebookPost.postURL} width="100%" />
+          </GridItem>
+        ))}
+      </Grid>
+    </Box>
   );
 }
 
