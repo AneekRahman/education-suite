@@ -13,7 +13,7 @@
     width: 100%;
     background-color: rgba(34, 33, 41);
     z-index: 2147483647;
-    transition: 1s;
+    transition: 0.7s;
     transition-timing-function: cubic-bezier(1, 0.57, 0.31, 1);
 
     .ImageHolder {
@@ -97,12 +97,13 @@
       .EventColumn {
         margin-left: 1em;
         padding: 3em 1em;
-        transition: 0.2s;
+        transition: 0.3s;
         height: 100%;
         cursor: pointer;
 
         &:hover {
           opacity: 0.7;
+          transition: 0.2s;
           background-color: rgba(255, 255, 255, 0.05);
         }
 

@@ -100,7 +100,7 @@ function LoadingOverlay({
     <div
       className={styles.LoadingOverlay}
       style={{
-        transform: firestoreStillLoading ? "none" : "translateY(-120%)",
+        transform: firestoreStillLoading ? "none" : "translateY(-100%)",
       }}
     >
       <Center flexDir="column" height="100%">
