@@ -16,13 +16,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
-import { FaClipboardList, FaHome } from "react-icons/fa";
+import { FaClipboardList, FaFacebook, FaHome } from "react-icons/fa";
 import { BsGridFill } from "react-icons/bs";
 import MyTexts from "../../components/texts";
 import styles from "../../styles/AdminPanel/DashboardPage.module.scss";
 import DashboardPageBody from "./DashboardPageBody";
 import DashEventsPageBody from "./DashEventsPageBody";
 import DashNoticesPageBody from "./DashNoticesPageBody";
+import DashFBPostsPageBody from "./DashFBPostsPageBody";
 
 export default function DashboardPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -61,8 +62,9 @@ export default function DashboardPage() {
                 currentUser={currentUser}
               />
               {pageCount === 0 ? <DashboardPageBody /> : null}
-              {pageCount === 1 ? <DashEventsPageBody /> : null}
-              {pageCount === 2 ? <DashNoticesPageBody /> : null}
+              {pageCount === 1 ? <DashFBPostsPageBody /> : null}
+              {pageCount === 2 ? <DashEventsPageBody /> : null}
+              {pageCount === 3 ? <DashNoticesPageBody /> : null}
             </Flex>
           )}
         </div>
@@ -102,8 +104,16 @@ function DashboardSideBox({
       <Box height={4} />
       <Button
         width="100%"
-        leftIcon={<BsGridFill />}
+        leftIcon={<FaFacebook />}
         onClick={(e) => setPageCount(1)}
+      >
+        FACEBOOK POSTS
+      </Button>
+      <Box height={4} />
+      <Button
+        width="100%"
+        leftIcon={<BsGridFill />}
+        onClick={(e) => setPageCount(2)}
       >
         SHOW EVENTS LIST
       </Button>
@@ -111,7 +121,7 @@ function DashboardSideBox({
       <Button
         width="100%"
         leftIcon={<FaClipboardList />}
-        onClick={(e) => setPageCount(2)}
+        onClick={(e) => setPageCount(3)}
       >
         SHOW NOTICE LIST
       </Button>
