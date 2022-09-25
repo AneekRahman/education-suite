@@ -101,41 +101,6 @@ export default function HomePage() {
   );
 }
 
-// const facebookPosts: FacebookPost[] = [
-//   {
-//     id: "",
-//     postURL:
-//       "https://www.facebook.com/100032460446844/videos/2073272926046281/",
-//     timeCreated: 1663945988679,
-//   },
-//   {
-//     id: "",
-//     postURL:
-//       "https://www.facebook.com/100032460446844/videos/1019905008525570/",
-//     timeCreated: 1663945988679,
-//   },
-//   {
-//     id: "",
-//     postURL: "https://www.facebook.com/100032460446844/videos/601821006903917",
-//     timeCreated: 1663945988679,
-//   },
-//   {
-//     id: "",
-//     postURL: "https://www.facebook.com/100032460446844/videos/1935331606507081",
-//     timeCreated: 1663945988679,
-//   },
-//   {
-//     id: "",
-//     postURL: "https://www.facebook.com/100032460446844/videos/2002375433136031",
-//     timeCreated: 1663945988679,
-//   },
-//   {
-//     id: "",
-//     postURL: "https://www.facebook.com/100032460446844/videos/2073251576048416",
-//     timeCreated: 1663945988679,
-//   },
-// ];
-
 function FacebookPostsGrid({
   facebookPosts,
 }: {
@@ -145,7 +110,7 @@ function FacebookPostsGrid({
 
   return (
     <Box className={styles.FacebookPostsGridWrapper}>
-      <h3>RECENT FACEBOOK POSTS</h3>
+      <h3>FEATURED POSTS</h3>
       <Grid
         className={styles.FacebookPostsGrid}
         templateColumns="repeat(3, 1fr)"
