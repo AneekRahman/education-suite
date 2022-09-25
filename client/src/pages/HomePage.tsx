@@ -15,6 +15,8 @@ import {
   Tbody,
   Td,
   Box,
+  Image,
+  Spinner,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import {
@@ -35,11 +37,16 @@ export default function HomePage() {
   });
   const [eventsList, setEventsList] = useState<Event[]>([]);
   const [noticesList, setNoticesList] = useState<Notice[]>([]);
+  const [firestoreStillLoading, setFirestoreStillLoading] = useState(true);
 
   // componentDidMount
   useEffect(() => {
     // Get /siteInfo/
-    FirestoreRequests.getSiteInfo().then((siteInfo) => setsiteInfo(siteInfo));
+    FirestoreRequests.getSiteInfo().then((siteInfo) => {
+      setsiteInfo(siteInfo);
+      // Hide the loading overlay
+      setFirestoreStillLoading(false);
+    });
 
     // Get newest 5 events from /events/
     FirestoreRequests.getEvents(5, undefined).then((events) =>
@@ -54,6 +61,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.HomePage}>
+      <LoadingOverlay firestoreStillLoading={firestoreStillLoading} />
       <div
         className={styles.HeroWrapper}
         style={{ backgroundImage: `url(${siteInfo.bgImageURL})` }}
@@ -61,7 +69,9 @@ export default function HomePage() {
         <div className={styles.BgDarkGradient}></div>
         <Header siteInfo={siteInfo} />
         <Box maxW={500} className={styles.HeroMainTextWrapper}>
-          <h2>{MyTexts.HERO_OVERLAY_TEXT}</h2>
+          <h2 style={{ opacity: firestoreStillLoading ? 0 : 1 }}>
+            {MyTexts.HERO_OVERLAY_TEXT}
+          </h2>
         </Box>
         <EventsBox eventsList={eventsList} />
       </div>
@@ -77,6 +87,35 @@ export default function HomePage() {
       </div>
       <LocationAboutBox />
       <Footer />
+    </div>
+  );
+}
+
+function LoadingOverlay({
+  firestoreStillLoading,
+}: {
+  firestoreStillLoading: boolean;
+}) {
+  return (
+    <div
+      className={styles.LoadingOverlay}
+      style={{
+        transform: firestoreStillLoading ? "none" : "translateY(-120%)",
+      }}
+    >
+      <Center flexDir="column" height="100%">
+        <Flex className={styles.LoadingOverlayInnerWrapper}>
+          <Box className={styles.ImageHolder}>
+            <Image src="/assets/header-logo.png" />
+          </Box>
+          <Box className={styles.ImageHolder}>
+            <Center height="100%">
+              <Image src="/assets/esuite-logo.svg" />
+            </Center>
+          </Box>
+        </Flex>
+        <Spinner color="white" marginTop={4} />
+      </Center>
     </div>
   );
 }
