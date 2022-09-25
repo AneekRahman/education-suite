@@ -5,6 +5,30 @@
   background-color: #ffbdbd;
   background-image: url(../../public/assets/logo-bg-repeated-pattern.png);
 
+  .LoadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(34, 33, 41);
+    z-index: 2147483647;
+    transition: 1s;
+    transition-timing-function: cubic-bezier(1, 0.57, 0.31, 1);
+
+    .ImageHolder {
+      width: 16em;
+      height: 16em;
+      padding: 3em;
+      border: 1.2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100em;
+    }
+
+    .ImageHolder:nth-child(1) {
+      margin-right: -2em;
+    }
+  }
+
   .HeroWrapper {
     padding-bottom: 4em;
     min-height: 100vh;
@@ -37,6 +61,8 @@
         color: white;
         text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.5);
         position: relative;
+        transition: 0.3s;
+        transition-delay: 1.2s;
       }
 
       h2::before {
@@ -269,6 +295,16 @@
 
 @media screen and (max-width: $mobileMediaThreshold) {
   .HomePage {
+    .LoadingOverlay {
+      .LoadingOverlayInnerWrapper {
+        flex-direction: column;
+
+        .ImageHolder:nth-child(1) {
+          margin: 0;
+          margin-bottom: -2em;
+        }
+      }
+    }
     .HeroWrapper {
       .HeroMainTextWrapper {
         h2 {

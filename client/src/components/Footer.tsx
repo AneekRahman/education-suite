@@ -81,9 +81,8 @@ export default function Footer() {
               color="rgb(253, 255, 118)"
               isExternal
             >
-              <u>Baalish Studios</u>
-            </ChakraLink>{" "}
-            Education Suite
+              Baalish Studios e-suite
+            </ChakraLink>
           </Text>
         </Center>
       </div>
