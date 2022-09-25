@@ -10,6 +10,12 @@ import {
   startAfter,
 } from "firebase/firestore";
 
+interface FacebookPost {
+  id: string;
+  postURL: string;
+  timeCreated: number;
+}
+
 interface SiteInfo {
   bgImageURL: string;
   movingHeader: {
@@ -39,7 +45,7 @@ interface MyTab {
 }
 
 // Export the types
-export type { Event, Notice, MyTab, SiteInfo };
+export type { Event, Notice, MyTab, SiteInfo, FacebookPost };
 
 // EXPORT THE CONSTANT VALUES --------------------
 
@@ -229,6 +235,45 @@ export class FirestoreRequests {
         };
       });
       return notices;
+    }
+    // If none found return empty
+    return [];
+  };
+
+  // Get newest posts from /facebookPosts/
+  static getFacebookPosts = async (
+    docsLimit: number,
+    lastTimeCreated?: number
+  ): Promise<FacebookPost[]> => {
+    // Query Without startAfter
+    let q = query(
+      collection(getFirestore(), "facebookPosts"),
+      orderBy("timeCreated", "desc"),
+      limit(docsLimit)
+    );
+    // Query If we need to use startAfter
+    if (lastTimeCreated) {
+      q = query(
+        collection(getFirestore(), "facebookPosts"),
+        orderBy("timeCreated", "desc"),
+        startAfter(lastTimeCreated),
+        limit(docsLimit)
+      );
+    }
+
+    // Do the query
+    const snapshots = await getDocs(q);
+
+    if (!snapshots.empty) {
+      const facebookPosts: FacebookPost[] = snapshots.docs.map((snapshot) => {
+        const data = snapshot.data();
+        return {
+          id: snapshot.id,
+          timeCreated: data.timeCreated,
+          postURL: data.postURL,
+        };
+      });
+      return facebookPosts;
     }
     // If none found return empty
     return [];

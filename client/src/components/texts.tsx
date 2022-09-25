@@ -15,6 +15,8 @@ export default class MyTexts {
   static SITE_FULL_LINK: string = "https://example.com";
   static CONTACT_EMAIL: string = "example@gmail.com";
   static CONTACT_PHONE_NUMBER: string = "০২-৫৮১৫৫৮৭১";
+  static FACEBOOK_ACCOUNT_URL: string =
+    "https://www.facebook.com/profile.php?id=100032460446844";
 
   // Texts /assets/ url
   static HEADER_LOGO_URL: string = "/assets/header-logo.png";

@@ -17,10 +17,12 @@ import {
   Box,
   Image,
   Spinner,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import {
   Event,
+  FacebookPost,
   FirestoreRequests,
   Notice,
   SiteInfo,
@@ -38,6 +40,7 @@ export default function HomePage() {
   });
   const [eventsList, setEventsList] = useState<Event[]>([]);
   const [noticesList, setNoticesList] = useState<Notice[]>([]);
+  const [facebookPosts, setFacebookPosts] = useState<FacebookPost[]>([]);
   const [firestoreStillLoading, setFirestoreStillLoading] = useState(true);
 
   // componentDidMount
@@ -57,6 +60,11 @@ export default function HomePage() {
     // Get newest 7 notices from /notices/
     FirestoreRequests.getNotices(7, undefined).then((notices) =>
       setNoticesList(notices)
+    );
+
+    // Get newest facebook posts from /facebookPosts/
+    FirestoreRequests.getFacebookPosts(6, undefined).then((facebookPosts) =>
+      setFacebookPosts(facebookPosts)
     );
   }, []);
 
@@ -81,7 +89,7 @@ export default function HomePage() {
         <img src="/assets/wiggly-bg1.svg" className={styles.WiggleBg1} alt="" />
         <NoticeBox noticesList={noticesList} />
       </div>
-      <FacebookPostsGrid />
+      <FacebookPostsGrid facebookPosts={facebookPosts} />
       <div className={styles.WigglyBg2Wrapper}>
         <img src="/assets/wiggly-bg2.svg" className={styles.WiggleBg2} alt="" />
         <EventsImageGrid eventsList={eventsList} />
@@ -93,48 +101,46 @@ export default function HomePage() {
   );
 }
 
-interface FacebookPost {
-  id: string;
-  postURL: string;
-  timeCreated: number;
-}
+// const facebookPosts: FacebookPost[] = [
+//   {
+//     id: "",
+//     postURL:
+//       "https://www.facebook.com/100032460446844/videos/2073272926046281/",
+//     timeCreated: 1663945988679,
+//   },
+//   {
+//     id: "",
+//     postURL:
+//       "https://www.facebook.com/100032460446844/videos/1019905008525570/",
+//     timeCreated: 1663945988679,
+//   },
+//   {
+//     id: "",
+//     postURL: "https://www.facebook.com/100032460446844/videos/601821006903917",
+//     timeCreated: 1663945988679,
+//   },
+//   {
+//     id: "",
+//     postURL: "https://www.facebook.com/100032460446844/videos/1935331606507081",
+//     timeCreated: 1663945988679,
+//   },
+//   {
+//     id: "",
+//     postURL: "https://www.facebook.com/100032460446844/videos/2002375433136031",
+//     timeCreated: 1663945988679,
+//   },
+//   {
+//     id: "",
+//     postURL: "https://www.facebook.com/100032460446844/videos/2073251576048416",
+//     timeCreated: 1663945988679,
+//   },
+// ];
 
-const facebookPosts: FacebookPost[] = [
-  {
-    id: "",
-    postURL:
-      "https://www.facebook.com/100032460446844/videos/2073272926046281/",
-    timeCreated: 1663945988679,
-  },
-  {
-    id: "",
-    postURL:
-      "https://www.facebook.com/100032460446844/videos/1019905008525570/",
-    timeCreated: 1663945988679,
-  },
-  {
-    id: "",
-    postURL: "https://www.facebook.com/100032460446844/videos/601821006903917",
-    timeCreated: 1663945988679,
-  },
-  {
-    id: "",
-    postURL: "https://www.facebook.com/100032460446844/videos/1935331606507081",
-    timeCreated: 1663945988679,
-  },
-  {
-    id: "",
-    postURL: "https://www.facebook.com/100032460446844/videos/2002375433136031",
-    timeCreated: 1663945988679,
-  },
-  {
-    id: "",
-    postURL: "https://www.facebook.com/100032460446844/videos/2073251576048416",
-    timeCreated: 1663945988679,
-  },
-];
-
-function FacebookPostsGrid() {
+function FacebookPostsGrid({
+  facebookPosts,
+}: {
+  facebookPosts: FacebookPost[];
+}) {
   if (facebookPosts.length === 0) return <></>;
 
   return (
@@ -153,7 +159,9 @@ function FacebookPostsGrid() {
       </Grid>
       <Spacer h="6" />
       <Center>
-        <Button colorScheme="red">GO TO OUR FACEBOOK</Button>
+        <ChakraLink href={MyTexts.FACEBOOK_ACCOUNT_URL} isExternal>
+          <Button colorScheme="red">GO TO OUR FACEBOOK</Button>
+        </ChakraLink>
       </Center>
     </Box>
   );
@@ -333,7 +341,7 @@ function NoticeBox({ noticesList }: { noticesList: Notice[] }) {
           ))}
           <Center>
             <Link to="/notices">
-              <Button zIndex={1000} colorScheme="blackAlpha">
+              <Button zIndex={1000} colorScheme="red">
                 SHOW ALL NOTICES
               </Button>
             </Link>
