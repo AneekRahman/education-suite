@@ -114,7 +114,11 @@ function LoadingOverlay({
             </Center>
           </Box>
         </Flex>
-        <Spinner color="white" marginTop={4} />
+        <Spinner
+          color="white"
+          marginTop={4}
+          style={{ opacity: !firestoreStillLoading ? 0 : 1, transition: ".2s" }}
+        />
       </Center>
     </div>
   );
